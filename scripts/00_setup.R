@@ -77,3 +77,39 @@ clean <- clean |>
         mutate(female = factor(female,
                                 levels = c("male", "female")))
 clean |> freq(female) # 51.7% female
+
+## Race/Ethnicity ---------------
+clean |> freq(Q9)
+clean <- clean |>
+        mutate(white = case_when(Q9 == "White" ~ "white",
+                                 TRUE ~ "non-white")) |>
+        mutate(white = factor(white,
+                              levels = c("non-white", "white")))
+clean |> freq(white) # 73.6% white
+
+## Education ---------------
+clean |> freq(Q10)
+clean <- clean |>
+        mutate(educ = factor(Q10,
+                             levels = c("Less than high school",
+                                        "High school graduate",
+                                        "Some college",
+                                        "2-year degree (e.g., associate degree)",
+                                        "4-year degree (e.g., bachelors degree)",
+                                        "Post-graduate degree (e.g., graduate school, JD, MD, PhD)")))
+clean |> freq(educ) # Median: 2-year degree
+
+## Income ---------------
+clean |> freq(Q11)
+clean <- clean |>
+        mutate(income = factor(Q11,
+                               levels = c("Less than $25,000",
+                                          "$25,000 to $49,999",
+                                          "$50,000 to $74,999",
+                                          "$75,000 to $99,999",
+                                          "$100,000 to $124,999",
+                                          "$125,000 to $149,999",
+                                          "$150,000 to $174,999",
+                                          "$175,000 to $199,999",
+                                          "$200,000 or more")))
+clean |> freq(income) # Median: $50,000 to $74,999
