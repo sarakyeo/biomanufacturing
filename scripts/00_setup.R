@@ -51,11 +51,11 @@ clean <- biomade |> filter(gc == 1)
 
 
 # Check consent ---------------------
-clean |> freq(Q2)
+clean |> freq(Q2) # 1,190 consented to participate
 
 
 # Check US residency ------------------------
-clean |> freq(Q3)
+clean |> freq(Q3) # 1,190 US residents
 
 
 # Check demographics -----------------------
