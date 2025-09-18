@@ -1,8 +1,12 @@
 ---
-title: "ASTEMM Survey Experiment: Data from NORC"
+title: "BioMADE Experiment: Definition Complexity and Issue"
 format: 
-  pdf:
+  html:
         toc: true
+        number-sections: true
+  pdf:
+        documentclass: article
+        toc: false
         number-sections: true
         keep-tex: true
         include-in-header:
@@ -30,7 +34,62 @@ editor_options:
 #| echo: false
 
 source(here::here("scripts", "00_setup.R"))
+source(here::here("scripts", "01_exp-cond.R"))
 
 ```
 
-Data were collected by Qualtrics between August 29 and September 13, 2025. Of the final sample of 1,754, Qualtrics designated 1,190 responses as "good completes." 
+Data were collected by Qualtrics between August 29 and September 13, 2025. Of the final sample of 1,754, Qualtrics designated 1,190 responses as "good completes."
+
+The table below shows demographic information by experimental condition--none of the differences in the demographics between conditions are significant, which is indicative of random assignment to the experimental conditions.
+
+```{r}
+#| label: demographics
+#| echo: false
+#| output: true
+
+clean |>
+    tbl_summary(by = stim,
+    include = c(age, female, white, educ, income),
+    label = list(
+      age = "Age",
+      female = "Gender",
+      white = "Race (Non-White/White)",
+      educ = "Education",
+      income = "Income"  
+    ),
+    missing = c("no"),
+    statistic = list(
+                    all_continuous() ~ "{mean} ({sd})",
+                    all_categorical() ~ "{p}%"
+                )) |>
+    add_p(pvalue_fun = label_style_pvalue(digits = 2)) |>
+    add_overall() |>
+    modify_caption("Demographic characteristics of respondents by experimental condition.")
+
+```
+
+# Manipulation Checks
+
+The first manipulation check is a question about the perceived difficulty of understanding the definition provided in the survey.
+
+```{r}
+#| label: defn-manip-check
+#| echo: false
+#| output: true
+#| fig-cap: Mean levels of perceived difficulty of understanding the definition provided in the survey by simple vs. complex definition.
+#| fig-width: 5in
+#| fig-height: 5in
+
+clean |>
+    ggplot(aes(x = defn, y = MCself)) +
+    scale_y_continuous(name = "Perceived difficulty of definition",
+                           limits = c(1,7), # y-axis scale
+                           breaks = seq(1, 7, 1),
+                           expand = c(0,0)) +
+    scale_x_discrete(name = "", labels = c("simple definition",
+                                                            "complex definition")) +
+    theme_bw() +
+    stat_summary(fun = mean, geom = "point") +
+    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", width = 0.2)
+
+```

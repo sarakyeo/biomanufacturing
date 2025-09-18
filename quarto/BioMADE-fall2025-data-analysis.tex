@@ -1,0 +1,224 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+]{article}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{5}
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage{caption}
+\usepackage{anyfontsize}
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+\makeatletter
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\makeatother
+\makeatletter
+\@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={ASTEMM Survey Experiment: Data from NORC},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{ASTEMM Survey Experiment: Data from NORC}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\RecustomVerbatimEnvironment{verbatim}{Verbatim}{
+showspaces = false,
+showtabs = false,
+breaksymbolleft={},
+breaklines
+}
+
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, sharp corners, interior hidden, frame hidden, enhanced, breakable, borderline west={3pt}{0pt}{shadecolor}]}{\end{tcolorbox}}\fi
+
+Data were collected by Qualtrics between August 29 and September 13,
+2025. Of the final sample of 1,754, Qualtrics designated 1,190 responses
+as ``good completes.''
+
+\begin{table}
+\fontsize{12.0pt}{14.4pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcccccc}
+\toprule
+\textbf{Characteristic} & \textbf{Overall}  N = 1,190\textsuperscript{\textit{1}} & \textbf{simple/fabric}  N = 302\textsuperscript{\textit{1}} & \textbf{complex/fabric}  N = 291\textsuperscript{\textit{1}} & \textbf{simple/makeup}  N = 295\textsuperscript{\textit{1}} & \textbf{complex/makeup}  N = 302\textsuperscript{\textit{1}} & \textbf{p-value}\textsuperscript{\textit{2}} \\ 
+\midrule\addlinespace[2.5pt]
+Age & 48 (17) & 50 (18) & 48 (17) & 49 (18) & 47 (16) & 0.31 \\ 
+Gender &  &  &  &  &  & 0.35 \\ 
+    male & 48\% & 46\% & 52\% & 46\% & 49\% &  \\ 
+    female & 52\% & 54\% & 48\% & 54\% & 51\% &  \\ 
+Race (Non-White/White) &  &  &  &  &  & 0.71 \\ 
+    non-white & 26\% & 25\% & 25\% & 29\% & 26\% &  \\ 
+    white & 74\% & 75\% & 75\% & 71\% & 74\% &  \\ 
+Education &  &  &  &  &  & 0.075 \\ 
+    Less than high school & 3.4\% & 4.0\% & 3.8\% & 0.7\% & 5.3\% &  \\ 
+    High school graduate & 27\% & 27\% & 25\% & 28\% & 27\% &  \\ 
+    Some college & 19\% & 17\% & 18\% & 21\% & 20\% &  \\ 
+    2-year degree (e.g., associate degree) & 11\% & 11\% & 8.9\% & 13\% & 13\% &  \\ 
+    4-year degree (e.g., bachelors degree) & 22\% & 22\% & 22\% & 24\% & 19\% &  \\ 
+    Post-graduate degree (e.g., graduate school, JD, MD, PhD) & 18\% & 19\% & 22\% & 14\% & 17\% &  \\ 
+Income &  &  &  &  &  & 0.20 \\ 
+    Less than \$25,000 & 20\% & 21\% & 18\% & 21\% & 19\% &  \\ 
+    \$25,000 to \$49,999 & 25\% & 25\% & 25\% & 28\% & 24\% &  \\ 
+    \$50,000 to \$74,999 & 19\% & 19\% & 19\% & 18\% & 20\% &  \\ 
+    \$75,000 to \$99,999 & 11\% & 8.3\% & 8.6\% & 11\% & 14\% &  \\ 
+    \$100,000 to \$124,999 & 8.2\% & 8.6\% & 7.6\% & 8.1\% & 8.3\% &  \\ 
+    \$125,000 to \$149,999 & 7.9\% & 11\% & 8.3\% & 7.5\% & 5.3\% &  \\ 
+    \$150,000 to \$174,999 & 4.2\% & 2.6\% & 5.5\% & 3.7\% & 5.0\% &  \\ 
+    \$175,000 to \$199,999 & 1.9\% & 2.3\% & 2.1\% & 1.0\% & 2.3\% &  \\ 
+    \$200,000 or more & 3.1\% & 3.0\% & 5.9\% & 2.0\% & 1.7\% &  \\ 
+\bottomrule
+\end{tabular*}
+\begin{minipage}{\linewidth}
+\textsuperscript{\textit{1}}Mean (SD); \%\\
+\textsuperscript{\textit{2}}Kruskal-Wallis rank sum test; Pearson's Chi-squared test\\
+\end{minipage}
+\end{table}
+
+
+
+\end{document}
