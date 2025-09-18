@@ -1,0 +1,36 @@
+---
+title: "ASTEMM Survey Experiment: Data from NORC"
+format: 
+  pdf:
+        toc: true
+        number-sections: true
+        keep-tex: true
+        include-in-header:
+                text: |
+                  \usepackage{fvextra}
+                  \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+        include-before-body: 
+                text: |
+                  \RecustomVerbatimEnvironment{verbatim}{Verbatim}{
+                  showspaces = false,
+                  showtabs = false,
+                  breaksymbolleft={},
+                  breaklines
+                  }
+execute: 
+  echo: false
+  output: false
+  warning: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+#| label: setup
+#| echo: false
+
+source(here::here("scripts", "00_setup.R"))
+
+```
+
+Data were collected by Qualtrics between August 29 and September 13, 2025. Of the final sample of 1,754, Qualtrics designated 1,190 responses as "good completes." 
