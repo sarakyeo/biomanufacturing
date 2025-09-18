@@ -71,20 +71,22 @@ clean |>
 ```
 
 # Manipulation Checks
+## Perceived difficulty of self-understanding provided definition
 
-The first manipulation check is a question about the perceived difficulty of understanding the definition provided in the survey. The figure below shows mean levels of perceived difficulty of understanding the definition provided in the survey by simple vs. complex definition.
+The first manipulation check is a question about the perceived difficulty (be the respondent) of understanding the definition provided in the survey. The figure below shows mean levels of perceived difficulty of understanding the definition provided in the survey by simple vs. complex definition. The difference in mean levels of perceived difficulty was significant between the conditions ($t = -2.67$, $p = .008$).
 
 ```{r}
-#| label: defn-manip-check
+#| label: defn-MC-self
 #| echo: false
 #| output: true
+#| fig-align: center
 #| fig-width: 5
 #| fig-height: 5
 
 clean |>
     ggplot(aes(x = defn, y = MCself)) +
     scale_y_continuous(
-        name = "Perceived difficulty of definition",
+        name = "Perceived difficulty of definition (self)",
         limits = c(1, 7), # y-axis scale
         breaks = seq(1, 7, 1),
         expand = c(0, 0)
@@ -98,3 +100,35 @@ clean |>
     stat_summary(fun.data = mean_cl_normal, geom = "errorbar", width = 0.2)
 
 ```
+
+## Perceived difficulty of other-understanding provided definition
+
+The second manipulation check question asked respondents about their perceptions of how difficult it might be for others to understand the provided definition. The figure below shows mean levels of perceived difficulty that others might have understanding the definitions provided in the survey. The difference in mean levels of perceived difficulty was significant between the conditions ($t = -3.13$, $p = .002$).
+
+```{r}
+#| label: defn-MC-other
+#| echo: false
+#| output: true
+#| fig-align: center
+#| fig-width: 5
+#| fig-height: 5
+
+clean |>
+    ggplot(aes(x = defn, y = MCother)) +
+    scale_y_continuous(
+        name = "Perceived difficulty of definition (others)",
+        limits = c(1, 7), # y-axis scale
+        breaks = seq(1, 7, 1),
+        expand = c(0, 0)
+    ) +
+    scale_x_discrete(name = "", labels = c(
+        "simple definition",
+        "complex definition"
+    )) +
+    theme_bw() +
+    stat_summary(fun = mean, geom = "point") +
+    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", width = 0.2)
+
+```
+
+I was not sure what to do with the question about the terms used in the definition or the open-ended questions, which require coding.
