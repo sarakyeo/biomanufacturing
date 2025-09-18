@@ -21,20 +21,24 @@ library(FactoClass)
 
 
 # Functions ----------------
-var_recode <- function(vars, data){
-        data |> 
-                mutate(across({{vars}},
-                              .fns = parse_number,
-                              .names = "{.col}c"))
+var_recode <- function(vars, data) {
+        data |>
+                mutate(across({{ vars }},
+                        .fns = parse_number,
+                        .names = "{.col}c"
+                ))
 }
 
-var_remove <- function(vars, data){
-        data |> 
-                mutate(across({{vars}},
-                              .fns = ~replace(., 
-                                             . > 10,
-                                             NA_real_),
-                              .names = "{.col}c"))
+var_remove <- function(vars, data) {
+        data |>
+                mutate(across({{ vars }},
+                        .fns = ~ replace(
+                                .,
+                                . > 10,
+                                NA_real_
+                        ),
+                        .names = "{.col}c"
+                ))
 }
 
 
