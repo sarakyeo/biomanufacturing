@@ -146,7 +146,7 @@ source(here::here("scripts", "02_DVs.R"))
 
 ## Curiosity
 
-Created a variable from the items measuring curiosity in each of the experimental conditions (`Q29_1`: `Q29_4`, `Q44_1`:`Q44_4`, `Q59_1`:`Q59_4`, `Q74_1`:`Q74_4`). The table below shows the 
+Created a variable from the items measuring curiosity in each of the experimental conditions (`Q29_1`: `Q29_4`, `Q44_1`:`Q44_4`, `Q59_1`:`Q59_4`, `Q74_1`:`Q74_4`). The table below shows the means and standard deviations for this variable in the whole sample, as well as in the four experimental conditions.
 
 ```{r}
 #| label: curious
@@ -165,5 +165,30 @@ clean |>
   add_p(pvalue_fun = label_style_pvalue(digits = 2)) |>
   add_overall() |>
   modify_caption("Descriptive statistics of the variable measuring curiosity post-exposure to the stimulus.")
+
+```
+
+
+# Information Seeking
+
+Created a variable from the items measuring intentions to seek information in each of the experimental conditions (`Q30_1`: `Q30_5`, `Q45_1`:`Q45_5`, `Q60_1`:`Q60_5`, `Q75_1`:`Q75_5`). The table below shows the means and standard deviations for this variable in the whole sample, as well as in the four experimental conditions.
+
+```{r}
+#| label: infoseek
+#| echo: false
+#| output: true
+
+clean |>
+  tbl_summary(
+    by = stim,
+    include = c(infoseek),
+    label = list(
+      curious = "Likelihood of seeking information"),
+    missing = c("no"),
+    statistic = list(
+      all_continuous() ~ "{mean} ({sd})")) |>
+  add_p(pvalue_fun = label_style_pvalue(digits = 2)) |>
+  add_overall() |>
+  modify_caption("Descriptive statistics of the variable measuring information-seeking intentions post-exposure to the stimulus.")
 
 ```
