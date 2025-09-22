@@ -132,3 +132,40 @@ clean |>
 ```
 
 I was not sure what to do with the question about the terms used in the definition or the open-ended questions, which require coding.
+
+# Dependent Variables
+
+```{r}
+#| label: DVs
+#| echo: false
+#| output: false
+
+source(here::here("scripts", "02_DVs.R"))
+
+```
+
+## Curiosity
+
+Created a variable from the items measuring curiosity in each of the experimental conditions (`Q29_1`: `Q29_4`, `Q44_1`:`Q44_4`, `Q59_1`:`Q59_4`, `Q74_1`:`Q74_4`). 
+
+```{r}
+#| label: curious
+#| echo: false
+#| output: true
+
+clean |>
+    tbl_summary(
+        by = stim,
+        include = c(curious),
+        label = list(
+            curious = "Curiosity"
+        ),
+        missing = c("no"),
+        statistic = list(
+            all_continuous() ~ "{mean} ({sd})"
+        )
+    ) |>
+    add_overall() |>
+    modify_caption("Descriptive statistics of the variable measuring curiosity post-exposure to the stimulus.")
+
+```
