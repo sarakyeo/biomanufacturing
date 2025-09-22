@@ -146,7 +146,7 @@ source(here::here("scripts", "02_DVs.R"))
 
 ## Curiosity
 
-Created a variable from the items measuring curiosity in each of the experimental conditions (`Q29_1`: `Q29_4`, `Q44_1`:`Q44_4`, `Q59_1`:`Q59_4`, `Q74_1`:`Q74_4`). 
+Created a variable from the items measuring curiosity in each of the experimental conditions (`Q29_1`: `Q29_4`, `Q44_1`:`Q44_4`, `Q59_1`:`Q59_4`, `Q74_1`:`Q74_4`). The table below shows the 
 
 ```{r}
 #| label: curious

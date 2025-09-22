@@ -107,3 +107,7 @@ clean <- clean |>
     )
 clean |> freq(curious)
 descr(clean$curious) # M = 4.79, SD = 1.63
+
+
+# Information Seeking -----------------------
+
