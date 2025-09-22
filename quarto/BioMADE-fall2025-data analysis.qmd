@@ -162,7 +162,8 @@ clean |>
     missing = c("no"),
     statistic = list(
       all_continuous() ~ "{mean} ({sd})")) |>
-  add_p(pvalue_fun = label_style_pvalue(digits = 2)) |>
+  add_p(test = everything() ~ "oneway.test",
+        pvalue_fun = label_style_pvalue(digits = 2)) |>
   add_overall() |>
   modify_caption("Descriptive statistics of the variable measuring curiosity post-exposure to the stimulus.")
 
@@ -183,12 +184,16 @@ clean |>
     by = stim,
     include = c(infoseek),
     label = list(
-      curious = "Likelihood of seeking information"),
+      curious = "Likelihood of seeking information"
+    ),
     missing = c("no"),
     statistic = list(
       all_continuous() ~ "{mean} ({sd})")) |>
-  add_p(pvalue_fun = label_style_pvalue(digits = 2)) |>
+  add_p(test = everything() ~ "oneway.test",
+        pvalue_fun = label_style_pvalue(digits = 2)) |>
   add_overall() |>
-  modify_caption("Descriptive statistics of the variable measuring information-seeking intentions post-exposure to the stimulus.")
+  modify_caption(
+    "Descriptive statistics of the variable measuring information-seeking intentions post-exposure to the stimulus."
+  )
 
 ```

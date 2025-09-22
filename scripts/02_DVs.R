@@ -226,3 +226,109 @@ clean <- clean |>
     )
 clean |> freq(infoseek)
 descr(clean$infoseek) # M = 4.24, SD = 1.70
+
+
+# Support for biomanufacturing ------------
+# Simple/Fabrics
+clean |>
+    select(Q31_1:Q31_3) |>
+    freq()
+clean <- var_recode(data = clean, vars = Q31_1:Q31_3)
+clean |>
+    select(Q31_1c:Q31_3c) |>
+    freq()
+
+# Complex/Fabrics
+clean |>
+    select(Q46_1:Q46_3) |>
+    freq()
+clean <- var_recode(data = clean, vars = Q46_1:Q46_3)
+clean |>
+    select(Q46_1c:Q46_3c) |>
+    freq()
+
+# Simple/Makeup
+clean |>
+    select(Q61_1:Q61_3) |>
+    freq()
+clean <- var_recode(data = clean, vars = Q61_1:Q61_3)
+clean |>
+    select(Q61_1c:Q61_3c) |>
+    freq()
+
+# Complex/Makeup
+clean |>
+    select(Q76_1:Q76_3) |>
+    freq()
+clean <- var_recode(data = clean, vars = Q76_1:Q76_3)
+clean |>
+    select(Q76_1c:Q76_3c) |>
+    freq()
+
+# Combine into a single columns -------------
+clean <- clean |>
+    mutate(support1 = case_when(
+        Q31_1c == Q31_1c ~ Q31_1c,
+        Q46_1c == Q46_1c ~ Q46_1c,
+        Q61_1c == Q61_1c ~ Q61_1c,
+        Q76_1c == Q76_1c ~ Q76_1c
+    ))
+clean |> freq(support1)
+
+clean <- clean |>
+    mutate(support2 = case_when(
+        Q31_2c == Q31_2c ~ Q31_2c,
+        Q46_2c == Q46_2c ~ Q46_2c,
+        Q61_2c == Q61_2c ~ Q61_2c,
+        Q76_2c == Q76_2c ~ Q76_2c
+    ))
+clean |> freq(support2)
+
+
+# HERE!
+
+
+
+
+
+
+
+
+
+
+
+
+## Factor analysis on curiosity items -------------
+clean |>
+    select(curious1:curious4) |>
+    cortest.bartlett() # sig.
+
+clean |>
+    select(curious1:curious4) |>
+    KMO() # Overall MSA = .87
+
+clean |>
+    select(curious1:curious4) |>
+    fa.parallel() # 1 factor, 1 component
+
+clean |>
+    select(curious1:curious4) |>
+    fa(.,
+        nfactors = 1,
+        rotate = "promax",
+        fm = "pa"
+    ) |>
+    fa.diagram()
+
+## Cronbach's alpha -------------
+clean |>
+    select(curious1:curious4) |>
+    alpha() # Cronbach's alpha = 0.94
+
+clean <- clean |>
+    rowwise() |>
+    mutate(
+        curious = mean(c(curious1, curious2, curious3, curious4), na.rm = TRUE)
+    )
+clean |> freq(curious)
+descr(clean$curious) # M = 4.79, SD = 1.63
