@@ -98,9 +98,9 @@ clean <- clean |>
                              levels = c("Less than high school",
                                         "High school graduate",
                                         "Some college",
-                                        "2-year degree (e.g., associate degree)",
-                                        "4-year degree (e.g., bachelors degree)",
-                                        "Post-graduate degree (e.g., graduate school, JD, MD, PhD)")))
+                                        "2-year degree",
+                                        "4-year degree",
+                                        "Post-graduate degree")))
 clean |> freq(educ) # Median: 2-year degree
 
 ## Income ---------------

@@ -154,7 +154,7 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
-  pdftitle={ASTEMM Survey Experiment: Data from NORC},
+  pdftitle={BioMADE Experiment: Definition Complexity and Issue},
   colorlinks=true,
   linkcolor={blue},
   filecolor={Maroon},
@@ -162,7 +162,7 @@
   urlcolor={Blue},
   pdfcreator={LaTeX via pandoc}}
 
-\title{ASTEMM Survey Experiment: Data from NORC}
+\title{BioMADE Experiment: Definition Complexity and Issue}
 \author{}
 \date{}
 
@@ -175,49 +175,197 @@ breaksymbolleft={},
 breaklines
 }
 
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, sharp corners, interior hidden, frame hidden, enhanced, breakable, borderline west={3pt}{0pt}{shadecolor}]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, interior hidden, borderline west={3pt}{0pt}{shadecolor}, enhanced, breakable, frame hidden, sharp corners]}{\end{tcolorbox}}\fi
 
 Data were collected by Qualtrics between August 29 and September 13,
 2025. Of the final sample of 1,754, Qualtrics designated 1,190 responses
 as ``good completes.''
 
+The table below shows demographic information by experimental
+condition--none of the differences in the demographics between
+conditions are significant, which is indicative of random assignment to
+the experimental conditions.
+
 \begin{table}
 \fontsize{12.0pt}{14.4pt}\selectfont
-\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcccccc}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lc}
 \toprule
-\textbf{Characteristic} & \textbf{Overall}  N = 1,190\textsuperscript{\textit{1}} & \textbf{simple/fabric}  N = 302\textsuperscript{\textit{1}} & \textbf{complex/fabric}  N = 291\textsuperscript{\textit{1}} & \textbf{simple/makeup}  N = 295\textsuperscript{\textit{1}} & \textbf{complex/makeup}  N = 302\textsuperscript{\textit{1}} & \textbf{p-value}\textsuperscript{\textit{2}} \\ 
+\textbf{Characteristic} & \textbf{N = 1,190}\textsuperscript{\textit{1}} \\ 
 \midrule\addlinespace[2.5pt]
-Age & 48 (17) & 50 (18) & 48 (17) & 49 (18) & 47 (16) & 0.31 \\ 
-Gender &  &  &  &  &  & 0.35 \\ 
-    male & 48\% & 46\% & 52\% & 46\% & 49\% &  \\ 
-    female & 52\% & 54\% & 48\% & 54\% & 51\% &  \\ 
-Race (Non-White/White) &  &  &  &  &  & 0.71 \\ 
-    non-white & 26\% & 25\% & 25\% & 29\% & 26\% &  \\ 
-    white & 74\% & 75\% & 75\% & 71\% & 74\% &  \\ 
-Education &  &  &  &  &  & 0.075 \\ 
-    Less than high school & 3.4\% & 4.0\% & 3.8\% & 0.7\% & 5.3\% &  \\ 
-    High school graduate & 27\% & 27\% & 25\% & 28\% & 27\% &  \\ 
-    Some college & 19\% & 17\% & 18\% & 21\% & 20\% &  \\ 
-    2-year degree (e.g., associate degree) & 11\% & 11\% & 8.9\% & 13\% & 13\% &  \\ 
-    4-year degree (e.g., bachelors degree) & 22\% & 22\% & 22\% & 24\% & 19\% &  \\ 
-    Post-graduate degree (e.g., graduate school, JD, MD, PhD) & 18\% & 19\% & 22\% & 14\% & 17\% &  \\ 
-Income &  &  &  &  &  & 0.20 \\ 
-    Less than \$25,000 & 20\% & 21\% & 18\% & 21\% & 19\% &  \\ 
-    \$25,000 to \$49,999 & 25\% & 25\% & 25\% & 28\% & 24\% &  \\ 
-    \$50,000 to \$74,999 & 19\% & 19\% & 19\% & 18\% & 20\% &  \\ 
-    \$75,000 to \$99,999 & 11\% & 8.3\% & 8.6\% & 11\% & 14\% &  \\ 
-    \$100,000 to \$124,999 & 8.2\% & 8.6\% & 7.6\% & 8.1\% & 8.3\% &  \\ 
-    \$125,000 to \$149,999 & 7.9\% & 11\% & 8.3\% & 7.5\% & 5.3\% &  \\ 
-    \$150,000 to \$174,999 & 4.2\% & 2.6\% & 5.5\% & 3.7\% & 5.0\% &  \\ 
-    \$175,000 to \$199,999 & 1.9\% & 2.3\% & 2.1\% & 1.0\% & 2.3\% &  \\ 
-    \$200,000 or more & 3.1\% & 3.0\% & 5.9\% & 2.0\% & 1.7\% &  \\ 
+Age & 48 (17) \\ 
+Gender &  \\ 
+    male & 48\% \\ 
+    female & 52\% \\ 
+Race (Non-White/White) &  \\ 
+    non-white & 26\% \\ 
+    white & 74\% \\ 
+Education &  \\ 
+    Less than high school & 7.0\% \\ 
+    High school graduate & 55\% \\ 
+    Some college & 38\% \\ 
+    2-year degree & 0\% \\ 
+    4-year degree & 0\% \\ 
+    Post-graduate degree & 0\% \\ 
+Income &  \\ 
+    Less than \$25,000 & 20\% \\ 
+    \$25,000 to \$49,999 & 25\% \\ 
+    \$50,000 to \$74,999 & 19\% \\ 
+    \$75,000 to \$99,999 & 11\% \\ 
+    \$100,000 to \$124,999 & 8.2\% \\ 
+    \$125,000 to \$149,999 & 7.9\% \\ 
+    \$150,000 to \$174,999 & 4.2\% \\ 
+    \$175,000 to \$199,999 & 1.9\% \\ 
+    \$200,000 or more & 3.1\% \\ 
 \bottomrule
 \end{tabular*}
 \begin{minipage}{\linewidth}
 \textsuperscript{\textit{1}}Mean (SD); \%\\
-\textsuperscript{\textit{2}}Kruskal-Wallis rank sum test; Pearson's Chi-squared test\\
 \end{minipage}
 \end{table}
+
+\hypertarget{manipulation-checks}{%
+\section{Manipulation Checks}\label{manipulation-checks}}
+
+\hypertarget{perceived-difficulty-of-self-understanding-provided-definition}{%
+\subsection{Perceived difficulty of self-understanding provided
+definition}\label{perceived-difficulty-of-self-understanding-provided-definition}}
+
+The first manipulation check is a question about the perceived
+difficulty (be the respondent) of understanding the definition provided
+in the survey. The figure below shows mean levels of perceived
+difficulty of understanding the definition provided in the survey by
+simple vs.~complex definition. The difference in mean levels of
+perceived difficulty was significant between the conditions
+(\(t = -2.67\), \(p = .008\)).
+
+\begin{figure}
+
+{\centering \includegraphics{BioMADE-fall2025-data-analysis_files/figure-pdf/defn-MC-self-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{perceived-difficulty-of-other-understanding-provided-definition}{%
+\subsection{Perceived difficulty of other-understanding provided
+definition}\label{perceived-difficulty-of-other-understanding-provided-definition}}
+
+The second manipulation check question asked respondents about their
+perceptions of how difficult it might be for others to understand the
+provided definition. The figure below shows mean levels of perceived
+difficulty that others might have understanding the definitions provided
+in the survey. The difference in mean levels of perceived difficulty was
+significant between the conditions (\(t = -3.13\), \(p = .002\)).
+
+\begin{figure}
+
+{\centering \includegraphics{BioMADE-fall2025-data-analysis_files/figure-pdf/defn-MC-other-1.pdf}
+
+}
+
+\end{figure}
+
+I was not sure what to do with the question about the terms used in the
+definition or the open-ended questions, which require coding.
+
+\hypertarget{dependent-variables}{%
+\section{Dependent Variables}\label{dependent-variables}}
+
+\hypertarget{curiosity}{%
+\subsection{Curiosity}\label{curiosity}}
+
+Created a variable from the items measuring curiosity in each of the
+experimental conditions (\texttt{Q29\_1}: \texttt{Q29\_4},
+\texttt{Q44\_1}:\texttt{Q44\_4}, \texttt{Q59\_1}:\texttt{Q59\_4},
+\texttt{Q74\_1}:\texttt{Q74\_4}). The table below shows the means and
+standard deviations for this variable in the whole sample, as well as in
+the four experimental conditions. Analysis of variance (ANOVA) reveals
+no significant differences in the mean of curiosity between the
+conditions (\(F(3, 1185) = 0.34\), \(p = .80\)).
+
+\begin{figure}
+
+{\centering \includegraphics{BioMADE-fall2025-data-analysis_files/figure-pdf/curious-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{information-seeking}{%
+\subsection{Information Seeking}\label{information-seeking}}
+
+Created a variable from the items measuring intentions to seek
+information in each of the experimental conditions (\texttt{Q30\_1}:
+\texttt{Q30\_5}, \texttt{Q45\_1}:\texttt{Q45\_5},
+\texttt{Q60\_1}:\texttt{Q60\_5}, \texttt{Q75\_1}:\texttt{Q75\_5}). The
+table below shows the means and standard deviations for this variable in
+the whole sample, as well as in the four experimental conditions. There
+were no significant differences in this outcome variable by experimental
+condition (\(F(3, 1186) = .51\), \(p = .68\)).
+
+\begin{figure}
+
+{\centering \includegraphics{BioMADE-fall2025-data-analysis_files/figure-pdf/infoseek-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{support-for-biomanufacturing-federal-and-state-funding-of-research}{%
+\subsection{Support for Biomanufacturing, Federal and State Funding of
+Research}\label{support-for-biomanufacturing-federal-and-state-funding-of-research}}
+
+Created a variable from the items measuring intentions to seek
+information in each of the experimental conditions (\texttt{Q31\_1}:
+\texttt{Q31\_3}, \texttt{Q46\_1}:\texttt{Q46\_3},
+\texttt{Q61\_1}:\texttt{Q61\_3}, \texttt{Q76\_1}:\texttt{Q76\_3}). The
+table below shows the means and standard deviations for this variable in
+the whole sample, as well as in the four experimental conditions. There
+were no significant differences in the means of support by experimental
+condition (\(F(3, 1186) = .75\), \(p = .53\)).
+
+Even though the factor analysis revealed a single factor for this
+variable, it might be worth considering (for content validity)
+separating general support for biomanufacturing and support for funding
+(state and federal) of biomanufacturing research.
+
+\begin{figure}
+
+{\centering \includegraphics{BioMADE-fall2025-data-analysis_files/figure-pdf/support-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{risks-and-benefits}{%
+\subsection{Risks and Benefits}\label{risks-and-benefits}}
+
+Created a variable from the single items each measuring risk and benefit
+perceptions in each of the experimental conditions (\texttt{Q31\_4},
+\texttt{Q31\_5}, \texttt{Q46\_4}, \texttt{Q46\_5}, \texttt{Q61\_4},
+\texttt{Q61\_5}, \texttt{Q76\_4}, \texttt{Q76\_5}). The table below
+shows the means and standard deviations for this variable in the whole
+sample, as well as in the four experimental conditions. There were no
+significant differences in perceived benefits between conditions
+(\(F(3, 1183) = .19\), \(p = .90\)). However, there were significant
+differences in risk perceptions by experimental conditions
+(\(F(3,1186) = 3.27\), \(p = .02\)).
+
+\begin{figure}
+
+{\centering \includegraphics{BioMADE-fall2025-data-analysis_files/figure-pdf/risks-1.pdf}
+
+}
+
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics{BioMADE-fall2025-data-analysis_files/figure-pdf/benefits-1.pdf}
+
+}
+
+\end{figure}
 
 
 

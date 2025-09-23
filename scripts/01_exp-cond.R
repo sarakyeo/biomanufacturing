@@ -127,3 +127,17 @@ clean <- var_recode(data = clean, vars = c(Q27_1:Q27_7))
 clean |>
         select(Q27_1c:Q27_7c) |>
         freq()
+
+
+# Check demographics by experimental condition --------------
+clean |> 
+        select(age, stim) |> 
+        anova_test(age ~ stim, detailed = TRUE, effect.size = "pes") # ns
+
+chisq_test(x = clean$stim, y = clean$female) # ns
+
+chisq_test(x = clean$stim, y = clean$white) # ns
+
+chisq_test(x = clean$stim, y = clean$educ) # ns
+
+chisq_test(x = clean$stim, y = clean$income) # ns

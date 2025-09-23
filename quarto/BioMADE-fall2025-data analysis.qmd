@@ -49,7 +49,7 @@ The table below shows demographic information by experimental condition--none of
 
 clean |>
   tbl_summary(
-    by = stim,
+    # by = stim,
     include = c(age, female, white, educ, income),
     label = list(
       age = "Age",
@@ -64,9 +64,7 @@ clean |>
       all_categorical() ~ "{p}%"
     )
   ) |>
-  add_p(pvalue_fun = label_style_pvalue(digits = 2)) |>
-  add_overall() |>
-  modify_caption("Demographic characteristics of respondents by experimental condition.")
+ modify_caption("Demographic characteristics of respondents by experimental condition.")
 
 ```
 
@@ -80,8 +78,6 @@ The first manipulation check is a question about the perceived difficulty (be th
 #| echo: false
 #| output: true
 #| fig-align: center
-#| fig-width: 5
-#| fig-height: 5
 
 clean |>
   ggplot(aes(x = defn, y = MCself)) +
@@ -110,8 +106,6 @@ The second manipulation check question asked respondents about their perceptions
 #| echo: false
 #| output: true
 #| fig-align: center
-#| fig-width: 5
-#| fig-height: 5
 
 clean |>
   ggplot(aes(x = defn, y = MCother)) +
@@ -146,54 +140,245 @@ source(here::here("scripts", "02_DVs.R"))
 
 ## Curiosity
 
-Created a variable from the items measuring curiosity in each of the experimental conditions (`Q29_1`: `Q29_4`, `Q44_1`:`Q44_4`, `Q59_1`:`Q59_4`, `Q74_1`:`Q74_4`). The table below shows the means and standard deviations for this variable in the whole sample, as well as in the four experimental conditions.
+Created a variable from the items measuring curiosity in each of the experimental conditions (`Q29_1`: `Q29_4`, `Q44_1`:`Q44_4`, `Q59_1`:`Q59_4`, `Q74_1`:`Q74_4`). The table below shows the means and standard deviations for this variable in the whole sample, as well as in the four experimental conditions. Analysis of variance (ANOVA) reveals no significant differences in the mean of curiosity between the conditions ($F(3, 1185) = 0.34$, $p = .80$).
 
 ```{r}
 #| label: curious
 #| echo: false
 #| output: true
+#| fig-align: center
+
+# clean |>
+#   tbl_summary(
+#     by = stim,
+#     include = c(curious),
+#     label = list(
+#       curious = "Curiosity"
+#     ),
+#     missing = c("no"),
+#     statistic = list(
+#       all_continuous() ~ "{mean} ({sd})"
+#     )
+#   ) |>
+#   add_p(
+#     test = everything() ~ "oneway.test",
+#     pvalue_fun = label_style_pvalue(digits = 2)
+#   ) |>
+#   add_overall() |>
+#   modify_caption(
+#     "Descriptive statistics of the variable measuring curiosity post-exposure to the stimulus."
+#   )
 
 clean |>
-  tbl_summary(
-    by = stim,
-    include = c(curious),
-    label = list(
-      curious = "Curiosity"),
-    missing = c("no"),
-    statistic = list(
-      all_continuous() ~ "{mean} ({sd})")) |>
-  add_p(test = everything() ~ "oneway.test",
-        pvalue_fun = label_style_pvalue(digits = 2)) |>
-  add_overall() |>
-  modify_caption("Descriptive statistics of the variable measuring curiosity post-exposure to the stimulus.")
+  ggplot(aes(x = stim, y = curious)) +
+  scale_y_continuous(
+    name = "Curiosity",
+    limits = c(1, 7), # y-axis scale
+    breaks = seq(1, 7, 1),
+    expand = c(0, 0)) +
+  scale_x_discrete(
+    name = "",
+    labels = c(
+      "simple/fabrics",
+      "complexfabrics",
+      "simple/makeup",
+      "complex/makeup"
+    )) +
+  theme_bw() +
+  stat_summary(fun = mean, geom = "point") +
+  stat_summary(fun.data = mean_cl_normal, geom = "errorbar", width = 0.2)
+
 
 ```
 
 
-# Information Seeking
+## Information Seeking
 
-Created a variable from the items measuring intentions to seek information in each of the experimental conditions (`Q30_1`: `Q30_5`, `Q45_1`:`Q45_5`, `Q60_1`:`Q60_5`, `Q75_1`:`Q75_5`). The table below shows the means and standard deviations for this variable in the whole sample, as well as in the four experimental conditions.
+Created a variable from the items measuring intentions to seek information in each of the experimental conditions (`Q30_1`: `Q30_5`, `Q45_1`:`Q45_5`, `Q60_1`:`Q60_5`, `Q75_1`:`Q75_5`). The table below shows the means and standard deviations for this variable in the whole sample, as well as in the four experimental conditions. There were no significant differences in this outcome variable by experimental condition ($F(3, 1186) = .51$, $p = .68$).
 
 ```{r}
 #| label: infoseek
 #| echo: false
 #| output: true
+#| fig-align: center
 
-clean |>
-  tbl_summary(
-    by = stim,
-    include = c(infoseek),
-    label = list(
-      curious = "Likelihood of seeking information"
-    ),
-    missing = c("no"),
-    statistic = list(
-      all_continuous() ~ "{mean} ({sd})")) |>
-  add_p(test = everything() ~ "oneway.test",
-        pvalue_fun = label_style_pvalue(digits = 2)) |>
-  add_overall() |>
-  modify_caption(
-    "Descriptive statistics of the variable measuring information-seeking intentions post-exposure to the stimulus."
-  )
+# clean |>
+#   tbl_summary(
+#     by = stim,
+#     include = c(infoseek),
+#     label = list(
+#       infoseek = "Likelihood of seeking information"
+#     ),
+#     missing = c("no"),
+#     statistic = list(
+#       all_continuous() ~ "{mean} ({sd})")) |>
+#   add_p(test = everything() ~ "oneway.test",
+#         pvalue_fun = label_style_pvalue(digits = 2)) |>
+#   add_overall() |>
+#   modify_caption(
+#     "Descriptive statistics of the variable measuring information-seeking intentions post-exposure to the stimulus."
+#   )
+
+  clean |>
+  ggplot(aes(x = stim, y = infoseek)) +
+  scale_y_continuous(
+    name = "Intentions to seek information",
+    limits = c(1, 7), # y-axis scale
+    breaks = seq(1, 7, 1),
+    expand = c(0, 0)) +
+  scale_x_discrete(
+    name = "",
+    labels = c(
+      "simple/fabrics",
+      "complexfabrics",
+      "simple/makeup",
+      "complex/makeup"
+    )) +
+  theme_bw() +
+  stat_summary(fun = mean, geom = "point") +
+  stat_summary(fun.data = mean_cl_normal, geom = "errorbar", width = 0.2)
+
+```
+
+## Support for Biomanufacturing, Federal and State Funding of Research 
+
+Created a variable from the items measuring intentions to seek information in each of the experimental conditions (`Q31_1`: `Q31_3`, `Q46_1`:`Q46_3`, `Q61_1`:`Q61_3`, `Q76_1`:`Q76_3`). The table below shows the means and standard deviations for this variable in the whole sample, as well as in the four experimental conditions. There were no significant differences in the means of support by experimental condition ($F(3, 1186) = .75$, $p = .53$). 
+
+Even though the factor analysis revealed a single factor for this variable, it might be worth considering (for content validity) separating general support for biomanufacturing and support for funding (state and federal) of biomanufacturing research.
+
+```{r}
+#| label: support
+#| echo: false
+#| output: true
+#| fig-align: center
+
+# clean |>
+#   tbl_summary(
+#     by = stim,
+#     include = c(support),
+#     label = list(
+#       support = "Support for biomanufacturing"
+#     ),
+#     missing = c("no"),
+#     statistic = list(
+#       all_continuous() ~ "{mean} ({sd})")) |>
+#   add_p(test = everything() ~ "oneway.test",
+#         pvalue_fun = label_style_pvalue(digits = 2)) |>
+#   add_overall() |>
+#   modify_caption(
+#     "Descriptive statistics of the variable measuring support for biomanufacturing and state and federal funding of biomanufacturing research post-exposure to the stimulus."
+#   )
+
+  clean |>
+  ggplot(aes(x = stim, y = support)) +
+  scale_y_continuous(
+    name = "Support for biomanufacturing",
+    limits = c(1, 7), # y-axis scale
+    breaks = seq(1, 7, 1),
+    expand = c(0, 0)) +
+  scale_x_discrete(
+    name = "",
+    labels = c(
+      "simple/fabrics",
+      "complexfabrics",
+      "simple/makeup",
+      "complex/makeup"
+    )) +
+  theme_bw() +
+  stat_summary(fun = mean, geom = "point") +
+  stat_summary(fun.data = mean_cl_normal, geom = "errorbar", width = 0.2)
+
+```
+
+
+## Risks and Benefits
+
+Created a variable from the single items each measuring risk and benefit perceptions in each of the experimental conditions (`Q31_4`, `Q31_5`, `Q46_4`, `Q46_5`, `Q61_4`, `Q61_5`, `Q76_4`, `Q76_5`). The table below shows the means and standard deviations for this variable in the whole sample, as well as in the four experimental conditions. There were no significant differences in perceived benefits between conditions ($F(3, 1183) = .19$, $p = .90$). However, there were significant differences in risk perceptions by experimental conditions ($F(3,1186) = 3.27$, $p = .02$).
+
+```{r}
+#| label: risks
+#| echo: false
+#| output: true
+#| fig-align: center
+
+# clean |>
+#   tbl_summary(
+#     by = stim,
+#     include = c(risks),
+#     label = list(
+#       curious = "Perceived risks of biomanufacturing"
+#     ),
+#     missing = c("no"),
+#     statistic = list(
+#       all_continuous() ~ "{mean} ({sd})")) |>
+#   add_p(test = everything() ~ "oneway.test",
+#         pvalue_fun = label_style_pvalue(digits = 2)) |>
+#   add_overall() |>
+#   modify_caption(
+#     "Descriptive statistics of the variable measuring perceived risks of biomanufacturing post-exposure to the stimulus."
+#   )
+
+  clean |>
+  ggplot(aes(x = stim, y = risks)) +
+  scale_y_continuous(
+    name = "Perceived risks of biomanufacturing",
+    limits = c(1, 7), # y-axis scale
+    breaks = seq(1, 7, 1),
+    expand = c(0, 0)) +
+  scale_x_discrete(
+    name = "",
+    labels = c(
+      "simple/fabrics",
+      "complexfabrics",
+      "simple/makeup",
+      "complex/makeup"
+    )) +
+  theme_bw() +
+  stat_summary(fun = mean, geom = "point") +
+  stat_summary(fun.data = mean_cl_normal, geom = "errorbar", width = 0.2)
+
+```
+
+```{r}
+#| label: benefits
+#| echo: false
+#| output: true
+#| fig-align: center
+
+# clean |>
+#   tbl_summary(
+#     by = stim,
+#     include = c(benefits),
+#     label = list(
+#       benefits = "Perceived benefits of biomanufacturing"
+#     ),
+#     missing = c("no"),
+#     statistic = list(
+#       all_continuous() ~ "{mean} ({sd})")) |>
+#   add_p(test = everything() ~ "oneway.test",
+#         pvalue_fun = label_style_pvalue(digits = 2)) |>
+#   add_overall() |>
+#   modify_caption(
+#     "Descriptive statistics of the variable measuring perceived benefits of biomanufacturing post-exposure to the stimulus."
+#   )
+
+  clean |>
+  ggplot(aes(x = stim, y = benefits)) +
+  scale_y_continuous(
+    name = "Perceived benefits of biomanufacturing",
+    limits = c(1, 7), # y-axis scale
+    breaks = seq(1, 7, 1),
+    expand = c(0, 0)) +
+  scale_x_discrete(
+    name = "",
+    labels = c(
+      "simple/fabrics",
+      "complexfabrics",
+      "simple/makeup",
+      "complex/makeup"
+    )) +
+  theme_bw() +
+  stat_summary(fun = mean, geom = "point") +
+  stat_summary(fun.data = mean_cl_normal, geom = "errorbar", width = 0.2)
 
 ```

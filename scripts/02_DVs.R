@@ -284,35 +284,30 @@ clean <- clean |>
     ))
 clean |> freq(support2)
 
+clean <- clean |>
+    mutate(support3 = case_when(
+        Q31_3c == Q31_3c ~ Q31_3c,
+        Q46_3c == Q46_3c ~ Q46_3c,
+        Q61_3c == Q61_3c ~ Q61_3c,
+        Q76_3c == Q76_3c ~ Q76_3c
+    ))
+clean |> freq(support3)
 
-# HERE!
-
-
-
-
-
-
-
-
-
-
-
-
-## Factor analysis on curiosity items -------------
+## Factor analysis on support items -------------
 clean |>
-    select(curious1:curious4) |>
+    select(support1:support3) |>
     cortest.bartlett() # sig.
 
 clean |>
-    select(curious1:curious4) |>
-    KMO() # Overall MSA = .87
+    select(support1:support3) |>
+    KMO() # Overall MSA = .75
 
 clean |>
-    select(curious1:curious4) |>
+    select(support1:support3) |>
     fa.parallel() # 1 factor, 1 component
 
 clean |>
-    select(curious1:curious4) |>
+    select(support1:support3) |>
     fa(.,
         nfactors = 1,
         rotate = "promax",
@@ -322,13 +317,71 @@ clean |>
 
 ## Cronbach's alpha -------------
 clean |>
-    select(curious1:curious4) |>
-    alpha() # Cronbach's alpha = 0.94
+    select(support1:support3) |>
+    alpha() # Cronbach's alpha = 0.90
 
 clean <- clean |>
     rowwise() |>
     mutate(
-        curious = mean(c(curious1, curious2, curious3, curious4), na.rm = TRUE)
+        support = mean(c(support1, support2, support3), na.rm = TRUE)
     )
-clean |> freq(curious)
-descr(clean$curious) # M = 4.79, SD = 1.63
+clean |> freq(support)
+descr(clean$support) # M = 4.89, SD = 1.48
+
+# Risks and Benefits ------------
+# Simple/Fabrics
+clean |>
+    select(Q31_4:Q31_5) |>
+    freq()
+clean <- var_recode(data = clean, vars = Q31_4:Q31_5)
+clean |>
+    select(Q31_4c:Q31_5c) |>
+    freq()
+
+# Complex/Fabrics
+clean |>
+    select(Q46_4:Q46_5) |>
+    freq()
+clean <- var_recode(data = clean, vars = Q46_4:Q46_5)
+clean |>
+    select(Q46_4c:Q46_5c) |>
+    freq()
+
+# Simple/Makeup
+clean |>
+    select(Q61_4:Q61_5) |>
+    freq()
+clean <- var_recode(data = clean, vars = Q61_4:Q61_5)
+clean |>
+    select(Q61_4c:Q61_5c) |>
+    freq()
+
+# Complex/Makeup
+clean |>
+    select(Q76_4:Q76_5) |>
+    freq()
+clean <- var_recode(data = clean, vars = Q76_4:Q76_5)
+clean |>
+    select(Q76_4c:Q76_5c) |>
+    freq()
+
+# Combine into a single columns -------------
+clean <- clean |>
+    mutate(benefits = case_when(
+        Q31_4c == Q31_4c ~ Q31_4c,
+        Q46_4c == Q46_4c ~ Q46_4c,
+        Q61_4c == Q61_4c ~ Q61_4c,
+        Q76_4c == Q76_4c ~ Q76_4c
+    ))
+clean |> freq(benefits)
+descr(clean$benefits) # M = 5.05, SD = 1.53
+
+clean <- clean |>
+    mutate(risks = case_when(
+        Q31_5c == Q31_5c ~ Q31_5c,
+        Q46_5c == Q46_5c ~ Q46_5c,
+        Q61_5c == Q61_5c ~ Q61_5c,
+        Q76_5c == Q76_5c ~ Q76_5c
+    ))
+clean |> freq(risks)
+descr(clean$risks) # M = 4.49, SD = 1.60
