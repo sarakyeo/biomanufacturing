@@ -328,6 +328,31 @@ clean <- clean |>
 clean |> freq(support)
 descr(clean$support) # M = 4.89, SD = 1.48
 
+## Even though the factor analysis resulted in 1 factor, it might 
+## be worth considering separating general support for biomanufacturing
+## and support for funding research on biomanufacturing
+
+# Support for funding research -----------
+clean |> 
+    select(support2, support3) |> 
+    freq()
+
+clean |> 
+    select(support2, support3) |> 
+    cor_test() # Pearson's r = .76, p < .001
+ 
+clean <- clean |> 
+    rowwise() |> 
+    mutate(funding = mean(
+        c(support2, support3),
+        na.rm = TRUE
+    ))
+
+clean |> freq(funding)
+clean |> 
+    group_by() |> 
+    descr(funding) # M = 4.81, SD = 1.56
+
 # Risks and Benefits ------------
 # Simple/Fabrics
 clean |>

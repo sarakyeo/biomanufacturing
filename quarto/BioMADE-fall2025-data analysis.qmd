@@ -242,7 +242,7 @@ Created a variable from the items measuring intentions to seek information in ea
 
 ## Support for Biomanufacturing, Federal and State Funding of Research 
 
-Created a variable from the items measuring intentions to seek information in each of the experimental conditions (`Q31_1`: `Q31_3`, `Q46_1`:`Q46_3`, `Q61_1`:`Q61_3`, `Q76_1`:`Q76_3`). The table below shows the means and standard deviations for this variable in the whole sample, as well as in the four experimental conditions. There were no significant differences in the means of support by experimental condition ($F(3, 1186) = .75$, $p = .53$). 
+Created a variable from the items measuring support for biomanufacturing and federal and state funding of biomanufacturing research in each of the experimental conditions (`Q31_1`: `Q31_3`, `Q46_1`:`Q46_3`, `Q61_1`:`Q61_3`, `Q76_1`:`Q76_3`). The table below shows the means and standard deviations for this variable in the whole sample, as well as in the four experimental conditions. There were no significant differences in the means of support by experimental condition ($F(3, 1186) = .75$, $p = .53$). 
 
 Even though the factor analysis revealed a single factor for this variable, it might be worth considering (for content validity) separating general support for biomanufacturing and support for funding (state and federal) of biomanufacturing research.
 
