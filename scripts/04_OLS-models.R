@@ -31,8 +31,7 @@ export_summs(m0, m1, m2,
                             "Adj. R-squared"= "adj.r.squared",
                             "F" = "statistic",
                             "df" = "df",
-                            "p" = "p.value"
-                          ),
+                            "p" = "p.value"),
              error_format = "({std.error})",
              error_pos = c("same"),
              coefs = c("(Intercept)" = "(Intercept)",
@@ -53,8 +52,34 @@ export_summs(m0, m1, m2,
         print_latex() |> 
         capture.output(file = here::here("outputs", "tab-OLS-model.tex"))
 
-ixn.plot <- cat_plot(
-    model = mols,
+ixn.plot2 <- cat_plot(
+    model = m2,
+    pred = defn,
+    modx = female,
+    interval = TRUE,
+    int.type = "confidence",
+    int.width = .95,
+    x.label = "Definition Type",
+    y.label = "Support for biomanufacturing research",
+    line.thickness = 0.5,
+    pred.point.size = 1.5,
+    errorbar.width = 0.25,
+    colors = c("grey", "black")
+  ) +
+  theme_apa() + 
+  scale_y_continuous(
+    limits = c(1,7),
+    expand = c(0,0),
+    breaks = seq(1,7,1)
+  )
+
+ggsave(plot = ixn.plot2,
+       here::here("outputs", "int-fig-two-way.png"),
+       width = 6,
+       height = 5)
+
+ixn.plot3 <- cat_plot(
+    model = m2,
     pred = defn,
     modx = female,
     mod2 = issue,
@@ -73,10 +98,10 @@ ixn.plot <- cat_plot(
   scale_y_continuous(
     limits = c(1,7),
     expand = c(0,0),
-    breaks = seq(1,7, 1)
+    breaks = seq(1,7,1)
   )
 
-ggsave(plot = ixn.plot,
-       here::here("outputs", "int-fig.png"),
+ggsave(plot = ixn.plot3,
+       here::here("outputs", "int-fig-three-way.png"),
        width = 10,
        height = 5)

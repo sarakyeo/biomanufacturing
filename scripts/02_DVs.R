@@ -410,3 +410,56 @@ clean <- clean |>
     ))
 clean |> freq(risks)
 descr(clean$risks) # M = 4.49, SD = 1.60
+
+# Relative Risks/Benefits (risks outweight benefits/benefits outweigh risks) --------------
+# Risks and Benefits ------------
+# Simple/Fabrics
+clean |>
+    select(Q34) |>
+    freq()
+clean <- var_recode(data = clean, vars = Q34)
+clean |>
+    select(Q34c) |>
+    freq()
+
+# Complex/Fabrics
+clean |>
+    select(Q49) |>
+    freq()
+clean <- var_recode(data = clean, vars = Q49)
+clean |>
+    select(Q49c) |>
+    freq()
+
+# Simple/Makeup
+clean |>
+    select(Q64) |>
+    freq()
+clean <- var_recode(data = clean, vars = Q64)
+clean |>
+    select(Q64c) |>
+    freq()
+
+# Complex/Makeup
+clean |>
+    select(Q79) |>
+    freq()
+clean <- var_recode(data = clean, vars = Q79)
+clean |>
+    select(Q79c) |>
+    freq()
+
+# Combine into a single columns -------------
+clean <- clean |>
+    mutate(risksbens = case_when(
+        Q34c == Q34c ~ Q34c,
+        Q49c == Q49c ~ Q49c,
+        Q64c == Q64c ~ Q64c,
+        Q79c == Q79c ~ Q79c
+    ))
+clean |> freq(risksbens) # higher values = more benefits; lower values = more risks; 4 = risks are equal to benefits
+descr(clean$risksbens) # M = 4.53, SD = 1.65
+
+clean |> 
+  select(risksbens, risks, benefits) |> 
+  cor_pmat()
