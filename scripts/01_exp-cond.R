@@ -74,9 +74,9 @@ clean <- clean |>
         ))
 clean |> freq(MCself)
 
-clean |>
-        select(MCself, defn) |>
-        t_test(MCself ~ defn, detailed = TRUE)
+clean |> 
+        select(MCself, defn) |> 
+        t_test(formula = MCself ~ defn, detailed = TRUE)
 
 clean |>
         select(MCself, defn) |>
