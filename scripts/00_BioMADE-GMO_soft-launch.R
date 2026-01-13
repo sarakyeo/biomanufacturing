@@ -138,3 +138,22 @@ clean <- clean |>
         ))
 clean |> freq(educ)
 chisq_test(table(clean$educ, clean$stim)) # ns
+
+
+# Check DV randomization --------------------------
+# making sure that no DV set has 0 respondents
+## DV Set 1
+clean |> freq(Q4.1_1)
+clean |> freq(Q7.1_1)
+clean |> freq(Q10.1_1)
+clean |> freq(Q13.1_1)
+clean |> freq(Q16.1_1)
+clean |> freq(Q19.1_1)
+
+## DV Set 2
+clean |> freq(Q5.1_1)
+clean |> freq(Q8.1_1)
+clean |> freq(Q11.1_1)
+clean |> freq(Q14.1_1)
+clean |> freq(Q17.1_1)
+clean |> freq(Q20.1_1)
