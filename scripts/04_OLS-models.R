@@ -2,14 +2,14 @@
 m0 <- clean |> 
   select(support, female, defn, issue, risks, benefits) |> 
   na.omit() |> 
-  lm(formula = support ~ defn + issue + female + risks + benefits)
+  lm(formula = risks ~ defn + issue + female + benefits)
 m0 |> summ(center = TRUE)
 
 m1 <- clean |> 
   select(support, female, defn, issue, risks, benefits) |> 
   na.omit() |> 
   lm(formula = support ~ defn + issue + female + risks + benefits +
-    defn:issue + female:defn + female:issue)
+    defn:issue + defn:female + issue:female)
 m1 |> summ(center = TRUE)
 
 m2 <- clean |> 

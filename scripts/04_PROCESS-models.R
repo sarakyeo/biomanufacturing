@@ -49,7 +49,31 @@ clean |>
 #   seed = 20251013
 # )
 
+
 # DV = support; Testing simple mediation model with two mediators -----------------
+# Y = support
+# M1 = risks
+# M2 = benefits
+# X = defn
+# cov = issue, female
+
+m1 <- process(
+  data = clean, 
+  y = "support",
+  x = "ndefn",
+  m = c("risks", "benefits"),
+  cov = c("nfemale", "nissue"),
+  model = 4,
+  total = 1,
+  contrast = 1,
+  progress = 0,
+  save = 2,
+  boot = 10000,
+  seed = 20260127
+)
+
+
+# DV = support; Testing moderated mediation model with two mediators -----------------
 # Y = support
 # M1 = risks
 # M2 = benefits
@@ -62,6 +86,7 @@ m1 <- process(
   x = "ndefn",
   m = c("risks", "benefits"),
   w = "nissue",
+  cov = "nfemale",
   model = 8,
   total = 1,
   contrast = 1,
@@ -72,7 +97,7 @@ m1 <- process(
 )
 
 
-# DV = support; Testing moderated mediation model with two mediators -----------------
+# DV = support; Testing moderated mediation model with two mediators & two moderators -----------------
 # Y = support
 # M1 = risks
 # M2 = benefits
@@ -94,4 +119,29 @@ m2 <- process(
   save = 2,
   boot = 10000,
   seed = 20251111
+)
+
+
+# DV = support; Testing moderated mediation model with two mediators -----------------
+# Y = support
+# M1 = risks
+# M2 = benefits
+# X = defn
+# W = issue
+# cov = female
+
+m1 <- process(
+  data = clean, 
+  y = "support",
+  x = "ndefn",
+  m = c("risks", "benefits"),
+  w = "nissue",
+  cov = "nfemale",
+  model = 8,
+  total = 1,
+  contrast = 1,
+  progress = 0,
+  save = 2,
+  boot = 10000,
+  seed = 20260127
 )
