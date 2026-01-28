@@ -463,3 +463,20 @@ descr(clean$risksbens) # M = 4.53, SD = 1.65
 clean |> 
   select(risksbens, risks, benefits) |> 
   cor_pmat()
+
+
+# Cleaning perceived familiarity to include as covariate -------
+clean |> freq(Q19)
+clean <- var_recode(data = clean, vars = Q19)
+clean |> 
+        freq(Q19c)
+clean <- clean |> 
+    mutate(
+        familiar = Q19c
+    )
+clean |> freq(familiar)
+clean |> 
+    select(familiar) |> 
+    na.omit() |> 
+    group_by() |> 
+    descr(familiar) # M = 3.17, SD = 2.12
