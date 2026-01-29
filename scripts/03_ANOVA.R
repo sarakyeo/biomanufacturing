@@ -87,6 +87,18 @@ clean |>
   pairwise_t_test(risks ~ defn, p.adjust.method = "bonferroni")
 
 clean |>
+  select(defn, risks) |>
+  na.omit() |>
+  group_by() |> 
+  pairwise_t_test(risks ~ defn, p.adjust.method = "bonferroni")
+
+clean |>
+  select(defn, risks) |>
+  na.omit() |>
+  group_by(defn) |> 
+  descr(risks) # simple: M = 4.35, SD = 1.64; complex: M = 4.63, SD = 1.54
+
+clean |>
   select(issue, risks) |>
   na.omit() |>
   anova_test(risks ~ issue, effect.size = "pes", detailed = TRUE) # ns

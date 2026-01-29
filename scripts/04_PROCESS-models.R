@@ -167,6 +167,23 @@ m1 <- process(
   boot = 10000,
   seed = 20260128
 )
-m1 # copied to Google sheets and created table
-# https://docs.google.com/spreadsheets/d/19ZOcCt7smTHIOQ7S1QL5ywKeY2mdj6Fh6E51g216kQk/edit?gid=0#gid=0
+# made table manually in Excel
+# converted to LaTex using Mathpix
+# also used previous table on Overleaf from the paper below:
+# Yeo, S. K., Freiling, I., Yeon, J., Zhang, J. S., McKasy, M., Cacciatore, M. A., Su, L. Y.-F., & Siskind, S. R. (2025). Examining the use of aggressive satirical humor on perceptions of trustworthiness in communication about renewable energy. Science Communication, OnlineFirst. https://doi.org/10.1177/10755470251345746
 
+# Need indirect effects of issue manipulation on support 
+# via risks and benefits
+process(
+  data = clean, 
+  y = "support",
+  x = "nissue",
+  m = c("risks", "benefits"),
+  cov = c("nfemale", "familiar", "ndefn"),
+  model = 4,
+  total = 1,
+  contrast = 1,
+  progress = 0,
+  save = 2,
+  boot = 10000,
+  seed = 20260128)
