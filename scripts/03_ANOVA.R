@@ -128,8 +128,8 @@ ggsave(mean.risks,
        filename = "means-risks-plot.png",
        path = "outputs",
        device = "png",
-       width = 10,
-       height = 10,
+       width = 8,
+       height = 8,
        units = "in")
 
 clean |>

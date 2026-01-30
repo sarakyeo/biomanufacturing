@@ -76,7 +76,9 @@ clean |> freq(MCself)
 
 clean |> 
         select(MCself, defn) |> 
-        t_test(formula = MCself ~ defn, detailed = TRUE)
+        na.omit() |> 
+        group_by() |> 
+        t_test(formula = MCself ~ defn) # sig.
 
 clean |>
         select(MCself, defn) |>
