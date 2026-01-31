@@ -187,3 +187,18 @@ process(
   save = 2,
   boot = 10000,
   seed = 20260128)
+
+# Decided to also run the model without `nfemale` or `familiar`
+process(
+  data = clean, 
+  y = "support",
+  x = "ndefn",
+  m = c("risks", "benefits"),
+  cov = "nissue",
+  model = 4,
+  total = 1,
+  contrast = 1,
+  progress = 0,
+  save = 2,
+  boot = 10000,
+  seed = 20260128)
