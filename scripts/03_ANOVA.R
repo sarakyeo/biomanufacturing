@@ -47,6 +47,11 @@ clean |>
   na.omit() |>
   anova_test(support ~ issue, effect.size = "pes", detailed = TRUE) # ns
 
+clean |>
+  select(defn, issue, support) |>
+  na.omit() |>
+  anova_test(support ~ defn + issue + defn:issue, effect.size = "pes", detailed = TRUE) # ns
+
 # Benefits ------------------------
 clean |>
   select(stim, benefits) |>
@@ -62,6 +67,11 @@ clean |>
   select(issue, benefits) |>
   na.omit() |>
   anova_test(benefits ~ issue, effect.size = "pes", detailed = TRUE) # ns
+
+clean |>
+  select(defn, issue, benefits) |>
+  na.omit() |>
+  anova_test(benefits ~ defn + issue + defn:issue, effect.size = "pes", detailed = TRUE) # ns
 
 # Risks ------------------------
 clean |>
@@ -118,21 +128,26 @@ mean.risks <- clean |>
                            breaks = seq(1, 7, 1)) +
         jtools::theme_apa() +
         theme(
-          axis.title.y = element_text(size = 15),
-          axis.text.y = element_text(size = 15),
-          axis.title.x = element_text(size = 15),
-          axis.text.x = element_text(size = 15)
+          axis.title.y = element_text(size = 18),
+          axis.text.y = element_text(size = 18, color = "black"),
+          axis.title.x = element_text(size = 18),
+          axis.text.x = element_text(size = 18, color = "black")
         ) 
 
 ggsave(mean.risks,
        filename = "means-risks-plot.png",
        path = "outputs",
        device = "png",
-       width = 8,
-       height = 8,
+       width = 10,
+       height = 10,
        units = "in")
 
 clean |>
   select(issue, risks) |>
   na.omit() |>
   anova_test(risks ~ issue, effect.size = "pes", detailed = TRUE) # ns
+
+clean |>
+  select(defn, issue, risks) |>
+  na.omit() |>
+  anova_test(risks ~ defn + issue + defn:issue, effect.size = "pes", detailed = TRUE) # ns
