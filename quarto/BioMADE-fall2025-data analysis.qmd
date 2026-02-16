@@ -71,7 +71,7 @@ clean |>
 # Manipulation Checks
 ## Perceived difficulty of self-understanding provided definition
 
-The first manipulation check is a question about the perceived difficulty (be the respondent) of understanding the definition provided in the survey. The figure below shows mean levels of perceived difficulty of understanding the definition provided in the survey by simple vs. complex definition. The difference in mean levels of perceived difficulty was significant between the conditions ($t = -2.67$, $p = .008$).
+The first manipulation check is a question about the perceived difficulty (be the respondent) of understanding the definition provided in the survey. The figure below shows mean levels of perceived difficulty of understanding the definition provided in the survey by simple vs. complex definition. The difference in mean levels of perceived difficulty was significant between the conditions ($t[1,187] = -2.67$, $p = .008$).
 
 ```{r}
 #| label: defn-MC-self
