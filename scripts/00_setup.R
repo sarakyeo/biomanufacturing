@@ -22,23 +22,23 @@ library(FactoClass)
 
 # Functions ----------------
 var_recode <- function(vars, data) {
-        data |>
-                mutate(across({{ vars }},
-                        .fns = parse_number,
-                        .names = "{.col}c"
-                ))
+data |>
+        mutate(across({{ vars }},
+                .fns = parse_number,
+                .names = "{.col}c"
+        ))
 }
 
 var_remove <- function(vars, data) {
-        data |>
-                mutate(across({{ vars }},
-                        .fns = ~ replace(
-                                .,
-                                . > 10,
-                                NA_real_
-                        ),
-                        .names = "{.col}c"
-                ))
+data |>
+        mutate(across({{ vars }},
+                .fns = ~ replace(
+                        .,
+                        . > 10,
+                        NA_real_
+                ),
+                .names = "{.col}c"
+        ))
 }
 
 
@@ -69,51 +69,51 @@ clean |> freq(Q4)
 ## Age ------------
 clean |> freq(Q6)
 clean <- clean |>
-        mutate(age = 2025 - Q6)
+mutate(age = 2025 - Q6)
 clean |> freq(age)
 clean |> descr(age) # M = 48.4, SD = 17.2
 
 ## Gender ------------
 clean |> freq(Q7)
 clean <- clean |>
-        mutate(female = case_when(Q7 == "Female" ~ "female",
-                                  Q7 == "Male" ~ "male")) |>
-        mutate(female = factor(female,
-                                levels = c("male", "female")))
+mutate(female = case_when(Q7 == "Female" ~ "female",
+                                Q7 == "Male" ~ "male")) |>
+mutate(female = factor(female,
+                        levels = c("male", "female")))
 clean |> freq(female) # 51.7% female
 
 ## Race/Ethnicity ---------------
 clean |> freq(Q9)
 clean <- clean |>
-        mutate(white = case_when(Q9 == "White" ~ "white",
-                                 TRUE ~ "non-white")) |>
-        mutate(white = factor(white,
-                              levels = c("non-white", "white")))
+mutate(white = case_when(Q9 == "White" ~ "white",
+                                TRUE ~ "non-white")) |>
+mutate(white = factor(white,
+                        levels = c("non-white", "white")))
 clean |> freq(white) # 73.6% white
 
 ## Education ---------------
 clean |> freq(Q10)
 clean <- clean |>
-        mutate(educ = factor(Q10,
-                             levels = c("Less than high school",
-                                        "High school graduate",
-                                        "Some college",
-                                        "2-year degree",
-                                        "4-year degree",
-                                        "Post-graduate degree")))
+mutate(educ = factor(Q10,
+                        levels = c("Less than high school",
+                                "High school graduate",
+                                "Some college",
+                                "2-year degree",
+                                "4-year degree",
+                                "Post-graduate degree")))
 clean |> freq(educ) # Median: 2-year degree
 
 ## Income ---------------
 clean |> freq(Q11)
 clean <- clean |>
-        mutate(income = factor(Q11,
-                               levels = c("Less than $25,000",
-                                          "$25,000 to $49,999",
-                                          "$50,000 to $74,999",
-                                          "$75,000 to $99,999",
-                                          "$100,000 to $124,999",
-                                          "$125,000 to $149,999",
-                                          "$150,000 to $174,999",
-                                          "$175,000 to $199,999",
-                                          "$200,000 or more")))
+mutate(income = factor(Q11,
+                        levels = c("Less than $25,000",
+                                        "$25,000 to $49,999",
+                                        "$50,000 to $74,999",
+                                        "$75,000 to $99,999",
+                                        "$100,000 to $124,999",
+                                        "$125,000 to $149,999",
+                                        "$150,000 to $174,999",
+                                        "$175,000 to $199,999",
+                                        "$200,000 or more")))
 clean |> freq(income) # Median: $50,000 to $74,999
