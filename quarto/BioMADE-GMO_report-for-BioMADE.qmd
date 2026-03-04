@@ -1,0 +1,60 @@
+---
+title: "BioMADE Survey Experiment (2026): GMO/Non-GMO and Products"
+format: 
+#   html:
+#         toc: true
+#         number-sections: true
+  pdf:
+        documentclass: article
+        toc: false
+        number-sections: true
+        keep-tex: true
+        include-in-header:
+                text: |
+                  \usepackage{fvextra}
+                  \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+        include-before-body: 
+                text: |
+                  \RecustomVerbatimEnvironment{verbatim}{Verbatim}{
+                  showspaces = false,
+                  showtabs = false,
+                  breaksymbolleft={},
+                  breaklines
+                  }
+execute: 
+  echo: false
+  output: false
+  warning: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+#| label: setup
+#| echo: false
+
+source(here::here("scripts", "00_BioMADE-GMO_setup.R"))
+source(here::here("scripts", "01_BioMADE-GMO_exp-cond.R"))
+source(here::here("scripts", "02_BioMADE-GMO_DVs.R"))
+source(here::here("scripts", "03_BioMADE-GMO_ANOVA.R"))
+
+
+```
+
+Data were collected between January 12 and March 3, 2026, via Qualtrics. We received 1,011 completed responses in the raw dataset. The survey contained an embedded experiment that manipulated the definition of biomanufacturing. The 2 (GMO vs. Non-GMO) $\times$ 3 (food, bandages, or footwear) between-subjects experiment contained stimuli that either included or excluded mentions of genetically modified organisms (GMOs), and varied the type of product used as an example. 
+
+Participants were randomly assigned to one of the six experimental groups (@tbl-exptgroups).
+
+```{r}
+#| label: tbl-exptgroups
+#| echo: false
+#| output: true
+
+biomade |> 
+  select(stim) |> 
+  group_by(stim) |> 
+  summarize(Frequency = n()) |> 
+  mutate(Percentage = round(Frequency / sum(Frequency) * 100, 1)) |> 
+  kbl(caption = "Frequency distribution of respondents in experimental groups.")
+
+```
