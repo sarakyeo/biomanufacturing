@@ -108,17 +108,65 @@ In addition to support, we measured risk and benefit perceptions as separate que
 #| output: true
 #| echo: false
 #| label: tbl-support
-#| tbl-cap: Mean and standard deviation of support by experimental condition.
+#| tbl-cap: Mean and standard deviation of support and risk and benefit perceptions by experimental condition (N = 1,011).
 
 biomade |> 
   select(
     stim,
-    support
+    support,
+    benefits,
+    risks
   ) |> 
     na.omit() |> 
     tbl_summary(
       by = stim,
-      type = support ~ "continuous2",
+      type = c(support, benefits, risks) ~ "continuous2",
+      statistic = list(
+        all_continuous() ~ c("{mean}",
+        "({sd})")
+      )
+    ) |> 
+      add_p(
+        list(
+          all_continuous() ~ "oneway.test"
+        )
+    ) |> 
+  modify_spanning_header(
+    c("stat_1", "stat_2", "stat_3") ~ "GMO",
+    c("stat_4", "stat_5", "stat_6") ~ "Non-GMO",
+  ) |> 
+  modify_header(
+    update = list(
+      stat_1 ~ "Bandages",
+      stat_2 ~ "Food",
+      stat_3 ~ "Footwear",
+      stat_4 ~ "Bandages",
+      stat_5 ~ "Food",
+      stat_6 ~ "Footwear"
+    )
+  )
+
+```
+
+# Labeling and willingness to pay more for biomanufactured products
+
+We also included questions (following exposure to the stimulus) that tapped respondents' attitudes toward labeling of biomanufactured products and their willingness to pay more for biomanufactured goods (@tbl-pay).
+
+```{r}
+#| output: true
+#| echo: false
+#| label: tbl-pay
+#| tbl-cap: Mean and standard deviation by experimental condition (N = 1,011).
+
+biomade |> 
+  select(
+    stim,
+    labeling, paymore
+  ) |> 
+    na.omit() |> 
+    tbl_summary(
+      by = stim,
+      type = c(labeling, paymore) ~ "continuous2",
       statistic = list(
         all_continuous() ~ c("{mean}",
         "({sd})")
