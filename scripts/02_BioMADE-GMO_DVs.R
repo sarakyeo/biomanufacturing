@@ -26,6 +26,9 @@ biomade <- biomade |>
   )
 
 biomade |> freq(worried)
+biomade |> 
+  group_by() |> 
+  descr(worried) # M = 3.61, SD = 1.86
 
 ## concerned -------
 biomade <- biomade |>
@@ -419,7 +422,8 @@ biomade |>
   fa.parallel() # 1 factor, 1 component
 
 biomade |> 
-  select(support1:support3) |> 
+  select(support1, support2, support3) |> 
+  group_by() |> 
   na.omit() |> 
   psych::alpha() # Cronbach's alpha = 0.9
 

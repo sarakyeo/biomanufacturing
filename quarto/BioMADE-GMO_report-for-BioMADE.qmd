@@ -1,26 +1,10 @@
 ---
 title: "BioMADE Survey Experiment (2026): GMO/Non-GMO and Products"
 format: 
-#   html:
-#         toc: true
-#         number-sections: true
-  pdf:
-        documentclass: article
-        toc: false
-        number-sections: true
-        keep-tex: true
-        include-in-header:
-                text: |
-                  \usepackage{fvextra}
-                  \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
-        include-before-body: 
-                text: |
-                  \RecustomVerbatimEnvironment{verbatim}{Verbatim}{
-                  showspaces = false,
-                  showtabs = false,
-                  breaksymbolleft={},
-                  breaklines
-                  }
+  pdf: 
+    include-in-header: 
+      text: |
+        \usepackage{typearea}
 execute: 
   echo: false
   output: false
@@ -38,23 +22,126 @@ source(here::here("scripts", "01_BioMADE-GMO_exp-cond.R"))
 source(here::here("scripts", "02_BioMADE-GMO_DVs.R"))
 source(here::here("scripts", "03_BioMADE-GMO_ANOVA.R"))
 
+set_gtsummary_theme(theme_gtsummary_compact())
 
 ```
 
 Data were collected between January 12 and March 3, 2026, via Qualtrics. We received 1,011 completed responses in the raw dataset. The survey contained an embedded experiment that manipulated the definition of biomanufacturing. The 2 (GMO vs. Non-GMO) $\times$ 3 (food, bandages, or footwear) between-subjects experiment contained stimuli that either included or excluded mentions of genetically modified organisms (GMOs), and varied the type of product used as an example. 
 
-Participants were randomly assigned to one of the six experimental groups (@tbl-exptgroups).
+Participants were randomly assigned to one of the six experimental groups (@tbl-exptgroups). After exposure to the experimental stimulus, we measured participants' emotional reactions to the stimulus, their support for research on biomanufacturing, risk and benefit perceptions, attitudes toward labeling biomanufactured products, and their willingness to pay more for a biomanufactured product.
 
 ```{r}
 #| label: tbl-exptgroups
 #| echo: false
 #| output: true
+#| tbl-cap: Frequency distribution of respondents in experimental groups (N = 1,011).
 
 biomade |> 
   select(stim) |> 
   group_by(stim) |> 
   summarize(Frequency = n()) |> 
   mutate(Percentage = round(Frequency / sum(Frequency) * 100, 1)) |> 
-  kbl(caption = "Frequency distribution of respondents in experimental groups.")
+  kbl()
+
+```
+
+
+# Emotional reactions to biomanufacturing after exposure to the stimulus
+
+After reading the definition of biomanufacturing, respondents were asked to indicate the extent to which they felt **worried**, **concerned**, **hopeful**, **optimistic**, **interested**, and **curious** (@tbl-emo). 
+
+```{r}
+#| output: true
+#| echo: false
+#| label: tbl-emo
+#| tbl-cap: Mean and standard deviation of emotional reactions by experimental condition.
+
+biomade |> 
+  select(
+    stim,
+    worried, concerned,
+    hopeful, optimistic,
+    interested, curious
+  ) |> 
+    na.omit() |> 
+    tbl_summary(
+      by = stim,
+      type = c(
+        worried, concerned,
+        hopeful, optimistic,
+        interested, curious
+      ) ~ "continuous2",
+      statistic = list(
+        all_continuous() ~ c("{mean}",
+        "({sd})")
+      )
+    ) |> 
+      add_p(
+        list(
+          all_continuous() ~ "oneway.test"
+        )
+    ) |> 
+  modify_spanning_header(
+    c("stat_1", "stat_2", "stat_3") ~ "GMO",
+    c("stat_4", "stat_5", "stat_6") ~ "Non-GMO",
+  ) |> 
+  modify_header(
+    update = list(
+      stat_1 ~ "Bandages",
+      stat_2 ~ "Food",
+      stat_3 ~ "Footwear",
+      stat_4 ~ "Bandages",
+      stat_5 ~ "Food",
+      stat_6 ~ "Footwear"
+    )
+  )
+
+```
+
+# Support for biomanufacturing research
+
+After exposure to the stimulus, we also asked respondents the extent to which they support biomanufacturing research, as well as federal and state funding of biomanufacturing research. We created a single index of support by averaging respondents' scores on these three questions.
+
+In addition to support, we measured risk and benefit perceptions as separate questions. @tbl-support shows the mean values and standard deviations of support, and risk and benefit perceptions by experimental condition.
+
+```{r}
+#| output: true
+#| echo: false
+#| label: tbl-support
+#| tbl-cap: Mean and standard deviation of support by experimental condition.
+
+biomade |> 
+  select(
+    stim,
+    support
+  ) |> 
+    na.omit() |> 
+    tbl_summary(
+      by = stim,
+      type = support ~ "continuous2",
+      statistic = list(
+        all_continuous() ~ c("{mean}",
+        "({sd})")
+      )
+    ) |> 
+      add_p(
+        list(
+          all_continuous() ~ "oneway.test"
+        )
+    ) |> 
+  modify_spanning_header(
+    c("stat_1", "stat_2", "stat_3") ~ "GMO",
+    c("stat_4", "stat_5", "stat_6") ~ "Non-GMO",
+  ) |> 
+  modify_header(
+    update = list(
+      stat_1 ~ "Bandages",
+      stat_2 ~ "Food",
+      stat_3 ~ "Footwear",
+      stat_4 ~ "Bandages",
+      stat_5 ~ "Food",
+      stat_6 ~ "Footwear"
+    )
+  )
 
 ```
