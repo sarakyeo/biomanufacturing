@@ -109,30 +109,30 @@ clean |>
   descr(risks) # simple: M = 4.35, SD = 1.64; complex: M = 4.63, SD = 1.54
 
 mean.risks <- clean |>
-        select(defn, risks) |>
-        na.omit() |>
-        ggplot(aes(x = defn)) +
-        stat_summary(aes(y = risks),
-                     fun = mean, 
-                     geom = "point") +
-        stat_summary(aes(y = risks),
-                     fun.data = mean_cl_normal,
-                     geom = "errorbar",
-                     width = 0.2) +
-        scale_x_discrete(name = "Definition",
-                         labels = c("simple",
-                                    "complex")) +
-        scale_y_continuous(name = "Perceived risks",
-                           expand = c(0,0),
-                           limits = c(1, 7),
-                           breaks = seq(1, 7, 1)) +
-        jtools::theme_apa() +
-        theme(
-          axis.title.y = element_text(size = 18),
-          axis.text.y = element_text(size = 18, color = "black"),
-          axis.title.x = element_text(size = 18),
-          axis.text.x = element_text(size = 18, color = "black")
-        ) 
+  select(defn, risks) |>
+  na.omit() |>
+  ggplot(aes(x = defn)) +
+  stat_summary(aes(y = risks), fun = mean, geom = "point") +
+  stat_summary(
+    aes(y = risks),
+    fun.data = mean_cl_normal,
+    geom = "errorbar",
+    width = 0.2
+  ) +
+  scale_x_discrete(name = "Definition", labels = c("simple", "complex")) +
+  scale_y_continuous(
+    name = "Perceived risks",
+    expand = c(0, 0),
+    limits = c(1, 7),
+    breaks = seq(1, 7, 1)
+  ) +
+  jtools::theme_apa() +
+  theme(
+    axis.title.y = element_text(size = 18),
+    axis.text.y = element_text(size = 18, color = "black"),
+    axis.title.x = element_text(size = 18),
+    axis.text.x = element_text(size = 18, color = "black")
+  ) 
 
 ggsave(mean.risks,
        filename = "means-risks-plot.png",
