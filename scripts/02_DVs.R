@@ -480,3 +480,14 @@ clean |>
     na.omit() |> 
     group_by() |> 
     descr(familiar) # M = 3.17, SD = 2.12
+
+# How informed others are about biomanufacturing --------
+clean |> freq(Q20)
+clean <- var_recode(data = clean, vars = Q20)
+clean |> 
+    freq(Q20c)
+clean |> 
+    select(Q20c) |> 
+    na.omit() |> 
+    group_by() |> 
+    descr(Q20c) # M = 3.34, SD = 1.97
