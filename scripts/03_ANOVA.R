@@ -134,20 +134,46 @@ mean.risks <- clean |>
     axis.text.x = element_text(size = 18, color = "black")
   ) 
 
-ggsave(mean.risks,
-       filename = "means-risks-plot.png",
+mean.bens <- clean |>
+  select(defn, benefits) |>
+  na.omit() |>
+  ggplot(aes(x = defn)) +
+  stat_summary(aes(y = benefits), fun = mean, geom = "point") +
+  stat_summary(
+    aes(y = benefits),
+    fun.data = mean_cl_normal,
+    geom = "errorbar",
+    width = 0.2
+  ) +
+  scale_x_discrete(name = "Definition", labels = c("simple", "complex")) +
+  scale_y_continuous(
+    name = "Perceived benefits",
+    expand = c(0, 0),
+    limits = c(1, 7),
+    breaks = seq(1, 7, 1)
+  ) +
+  jtools::theme_apa() +
+  theme(
+    axis.title.y = element_text(size = 18),
+    axis.text.y = element_text(size = 18, color = "black"),
+    axis.title.x = element_text(size = 18),
+    axis.text.x = element_text(size = 18, color = "black")
+  ) 
+
+ggsave(mean.bens,
+       filename = "means-bens-plot.png",
        path = "outputs",
        device = "png",
        width = 10,
        height = 10,
        units = "in")
 
-clean |>
-  select(issue, risks) |>
-  na.omit() |>
-  anova_test(risks ~ issue, effect.size = "pes", detailed = TRUE) # ns
+# clean |>
+#   select(issue, risks) |>
+#   na.omit() |>
+#   anova_test(risks ~ issue, effect.size = "pes", detailed = TRUE) # ns
 
-clean |>
-  select(defn, issue, risks) |>
-  na.omit() |>
-  anova_test(risks ~ defn + issue + defn:issue, effect.size = "pes", detailed = TRUE) # ns
+# clean |>
+#   select(defn, issue, risks) |>
+#   na.omit() |>
+#   anova_test(risks ~ defn + issue + defn:issue, effect.size = "pes", detailed = TRUE) # ns
