@@ -51,6 +51,37 @@ biomade |>
   na.omit() |> 
   anova_test(benefits ~ stim, effect.size = "pes") # ns
 
+biomade |>
+  select(
+    stim,
+    support,
+    benefits,
+    risks,
+    paymore
+  ) |>
+  na.omit() |>
+  ggplot(aes(x = stim, y = benefits)) +
+  scale_y_continuous(
+    name = "Perceived benefits",
+    limits = c(1, 7),
+    breaks = seq(1, 7, 1),
+    expand = c(0, 0)
+  ) +
+  scale_x_discrete(
+    name = "Experimental Conditions",
+    labels = c(
+      "GMO/Bandages",
+      "GMO/Food",
+      "GMO/Footwear",
+      "Non-GMO/Bandages",
+      "Non-GMO/Food",
+      "Non-GMO/Footwear"
+    )
+  ) +
+  theme_bw() +
+  stat_summary(fun = mean, geom = "point") +
+  stat_summary(fun.data = mean_cl_normal, geom = "errorbar", width = 0.2)
+
 # Risks ---------
 biomade |> 
   select(

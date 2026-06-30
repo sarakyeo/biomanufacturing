@@ -98,6 +98,7 @@ clean |>
 ## Cronbach's alpha -------------
 clean |>
     select(curious1:curious4) |>
+    group_by() |> 
     alpha() # Cronbach's alpha = 0.94
 
 clean <- clean |>
@@ -217,6 +218,7 @@ clean |>
 ## Cronbach's alpha -------------
 clean |>
     select(infoseek1:infoseek5) |>
+    group_by() |> 
     alpha() # Cronbach's alpha = 0.91
 
 clean <- clean |>
@@ -318,6 +320,7 @@ clean |>
 ## Cronbach's alpha -------------
 clean |>
     select(support1:support3) |>
+    group_by() |> 
     alpha() # Cronbach's alpha = 0.90
 
 clean <- clean |>
