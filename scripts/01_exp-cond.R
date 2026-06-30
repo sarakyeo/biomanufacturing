@@ -79,6 +79,8 @@ clean |>
         na.omit() |> 
         group_by() |> 
         t_test(formula = MCself ~ defn) # sig.
+#   .y.    group1 group2     n1    n2 statistic    df       p
+#   MCself simple complex   597   593     -2.67 1187. 0.00763
 
 clean |>
         select(MCself, defn) |>
