@@ -600,3 +600,282 @@ biomade |> freq(paymore) # NA = Don't know; skipped (573 NA = 56.7%)
 biomade |> 
   group_by() |> 
   descr(paymore) # M = 2.96, SD = 1.68
+
+
+# DV Set 2: Benefits ------------------------------
+## GM / Food
+biomade |> 
+  select(Q5.1_1:Q5.1_12) |> 
+  freq()
+
+biomade <- var_recode(
+  data = biomade,
+  vars = c(Q5.1_1:Q5.1_12)
+)
+
+biomade |> 
+  select(Q5.1_1c:Q5.1_12c) |> 
+  freq()
+
+## GM / bandage
+biomade |> 
+  select(Q8.1_1:Q8.1_12) |> 
+  freq()
+
+biomade <- var_recode(
+  data = biomade,
+  vars = c(Q8.1_1:Q8.1_12)
+)
+
+biomade |> 
+  select(Q8.1_1c:Q8.1_12c) |> 
+  freq()
+
+## GM / footwear
+biomade |> 
+  select(Q11.1_1:Q11.1_12) |> 
+  freq()
+
+biomade <- var_recode(
+  data = biomade,
+  vars = c(Q11.1_1:Q11.1_12)
+)
+
+biomade |> 
+  select(Q11.1_1c:Q11.1_12c) |> 
+  freq()
+
+# Non-GMO / food
+biomade |> 
+  select(Q14.1_1:Q14.1_12) |> 
+  freq()
+
+biomade <- var_recode(
+  data = biomade,
+  vars = c(Q14.1_1:Q14.1_12)
+)
+
+biomade |> 
+  select(Q14.1_1c:Q14.1_12c) |> 
+  freq()
+
+## Non-GMO / bandage
+biomade |> 
+  select(Q17.1_1:Q17.1_12) |> 
+  freq()
+
+biomade <- var_recode(
+  data = biomade,
+  vars = c(Q17.1_1:Q17.1_12)
+)
+
+biomade |> 
+  select(Q17.1_1c:Q17.1_12c) |> 
+  freq()
+
+## Non-GMO / footwear
+biomade |> 
+  select(Q20.1_1:Q20.1_12) |> 
+  freq()
+
+biomade <- var_recode(
+  data = biomade,
+  vars = c(Q20.1_1:Q20.1_12)
+)
+
+biomade |> 
+  select(Q20.1_1c:Q20.1_12c) |> 
+  freq()
+
+# Benefits 1 thru 12 into 12 separate columns in df ---------------------
+biomade <- biomade |> 
+  mutate(
+    bens1 = case_when(
+      Q5.1_1c ==Q5.1_1c ~ Q5.1_1c,
+      Q8.1_1c ==Q8.1_1c ~ Q8.1_1c,
+      Q11.1_1c ==Q11.1_1c ~ Q11.1_1c,
+      Q14.1_1c ==Q14.1_1c ~ Q14.1_1c,
+      Q17.1_1c ==Q17.1_1c ~ Q17.1_1c,
+      Q20.1_1c ==Q20.1_1c ~ Q20.1_1c,
+    )
+  )
+
+biomade <- biomade |> 
+  mutate(
+    bens2 = case_when(
+      Q5.1_2c ==Q5.1_2c ~ Q5.1_2c,
+      Q8.1_2c ==Q8.1_2c ~ Q8.1_2c,
+      Q11.1_2c ==Q11.1_2c ~ Q11.1_2c,
+      Q14.1_2c ==Q14.1_2c ~ Q14.1_2c,
+      Q17.1_2c ==Q17.1_2c ~ Q17.1_2c,
+      Q20.1_2c ==Q20.1_2c ~ Q20.1_2c,
+    )
+  )
+
+biomade <- biomade |> 
+  mutate(
+    bens3 = case_when(
+      Q5.1_3c == Q5.1_3c ~ Q5.1_3c,
+      Q8.1_3c == Q8.1_3c ~ Q8.1_3c,
+      Q11.1_3c == Q11.1_3c ~ Q11.1_3c,
+      Q14.1_3c == Q14.1_3c ~ Q14.1_3c,
+      Q17.1_3c == Q17.1_3c ~ Q17.1_3c,
+      Q20.1_3c == Q20.1_3c ~ Q20.1_3c,
+    )
+  )
+
+biomade <- biomade |> 
+  mutate(
+    bens4 = case_when(
+      Q5.1_4c == Q5.1_4c ~ Q5.1_4c,
+      Q8.1_4c == Q8.1_4c ~ Q8.1_4c,
+      Q11.1_4c == Q11.1_4c ~ Q11.1_4c,
+      Q14.1_4c == Q14.1_4c ~ Q14.1_4c,
+      Q17.1_4c == Q17.1_4c ~ Q17.1_4c,
+      Q20.1_4c == Q20.1_4c ~ Q20.1_4c,
+    )
+  )
+
+biomade <- biomade |> 
+  mutate(
+    bens5 = case_when(
+      Q5.1_5c == Q5.1_5c ~ Q5.1_5c,
+      Q8.1_5c == Q8.1_5c ~ Q8.1_5c,
+      Q11.1_5c == Q11.1_5c ~ Q11.1_5c,
+      Q14.1_5c == Q14.1_5c ~ Q14.1_5c,
+      Q17.1_5c == Q17.1_5c ~ Q17.1_5c,
+      Q20.1_5c == Q20.1_5c ~ Q20.1_5c,
+    )
+  )
+
+biomade <- biomade |> 
+  mutate(
+    bens6 = case_when(
+      Q5.1_6c == Q5.1_6c ~ Q5.1_6c,
+      Q8.1_6c == Q8.1_6c ~ Q8.1_6c,
+      Q11.1_6c == Q11.1_6c ~ Q11.1_6c,
+      Q14.1_6c == Q14.1_6c ~ Q14.1_6c,
+      Q17.1_6c == Q17.1_6c ~ Q17.1_6c,
+      Q20.1_6c == Q20.1_6c ~ Q20.1_6c,
+    )
+  )
+
+biomade <- biomade |> 
+  mutate(
+    bens7 = case_when(
+      Q5.1_7c == Q5.1_7c ~ Q5.1_7c,
+      Q8.1_7c == Q8.1_7c ~ Q8.1_7c,
+      Q11.1_7c == Q11.1_7c ~ Q11.1_7c,
+      Q14.1_7c == Q14.1_7c ~ Q14.1_7c,
+      Q17.1_7c == Q17.1_7c ~ Q17.1_7c,
+      Q20.1_7c == Q20.1_7c ~ Q20.1_7c,
+    )
+  )
+
+biomade <- biomade |> 
+  mutate(
+    bens8 = case_when(
+      Q5.1_8c == Q5.1_8c ~ Q5.1_8c,
+      Q8.1_8c == Q8.1_8c ~ Q8.1_8c,
+      Q11.1_8c == Q11.1_8c ~ Q11.1_8c,
+      Q14.1_8c == Q14.1_8c ~ Q14.1_8c,
+      Q17.1_8c == Q17.1_8c ~ Q17.1_8c,
+      Q20.1_8c == Q20.1_8c ~ Q20.1_8c,
+    )
+  )
+
+biomade <- biomade |> 
+  mutate(
+    bens9 = case_when(
+      Q5.1_9c == Q5.1_9c ~ Q5.1_9c,
+      Q8.1_9c == Q8.1_9c ~ Q8.1_9c,
+      Q11.1_9c == Q11.1_9c ~ Q11.1_9c,
+      Q14.1_9c == Q14.1_9c ~ Q14.1_9c,
+      Q17.1_9c == Q17.1_9c ~ Q17.1_9c,
+      Q20.1_9c == Q20.1_9c ~ Q20.1_9c,
+    )
+  )
+
+biomade <- biomade |> 
+  mutate(
+    bens10 = case_when(
+      Q5.1_10c == Q5.1_10c ~ Q5.1_10c,
+      Q8.1_10c == Q8.1_10c ~ Q8.1_10c,
+      Q11.1_10c == Q11.1_10c ~ Q11.1_10c,
+      Q14.1_10c == Q14.1_10c ~ Q14.1_10c,
+      Q17.1_10c == Q17.1_10c ~ Q17.1_10c,
+      Q20.1_10c == Q20.1_10c ~ Q20.1_10c,
+    )
+  )
+
+biomade <- biomade |> 
+  mutate(
+    bens11 = case_when(
+      Q5.1_11c == Q5.1_11c ~ Q5.1_11c,
+      Q8.1_11c == Q8.1_11c ~ Q8.1_11c,
+      Q11.1_11c == Q11.1_11c ~ Q11.1_11c,
+      Q14.1_11c == Q14.1_11c ~ Q14.1_11c,
+      Q17.1_11c == Q17.1_11c ~ Q17.1_11c,
+      Q20.1_11c == Q20.1_11c ~ Q20.1_11c,
+    )
+  )
+
+biomade <- biomade |> 
+  mutate(
+    bens12 = case_when(
+      Q5.1_12c == Q5.1_12c ~ Q5.1_12c,
+      Q8.1_12c == Q8.1_12c ~ Q8.1_12c,
+      Q11.1_12c == Q11.1_12c ~ Q11.1_12c,
+      Q14.1_12c == Q14.1_12c ~ Q14.1_12c,
+      Q17.1_12c == Q17.1_12c ~ Q17.1_12c,
+      Q20.1_12c == Q20.1_12c ~ Q20.1_12c,
+    )
+  )
+
+biomade |> 
+  select(bens1:bens12) |> 
+  freq()
+
+## Factor Analysis on 12 benefits items -----------------
+biomade |> 
+  select(bens1:bens12) |> 
+  KMO() # Overall MSA = 0.96
+
+biomade |> 
+  select(bens1:bens12) |> 
+  cortest.bartlett() # sig.
+
+biomade |> 
+  select(bens1:bens12) |> 
+  fa.parallel()
+
+fa <- biomade |> 
+  select(bens1:bens12) |> 
+  fa(.,
+      nfactors = 1,
+      fm = "pa",
+      max.iter = 100,
+      rotate = "promax")
+
+fa |> fa.diagram()
+
+print(fa$loadings,
+cutoff = .3,
+digits = 3)
+
+biomade <- biomade |> 
+  rowwise() |> 
+  mutate(
+    benefitscale = mean(
+      c(
+        bens1, bens2, bens3, bens4, bens5, bens6,
+        bens7, bens8, bens9, bens10, bens11, bens12
+      ),
+      na.rm = TRUE
+    )
+  )
+
+biomade |> freq(benefitscale)
+biomade |> 
+  group_by() |> 
+  descr(benefitscale) # M = 5.17, SD = 1.12
