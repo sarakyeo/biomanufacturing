@@ -494,3 +494,7 @@ clean |>
     na.omit() |> 
     group_by() |> 
     descr(Q20c) # M = 3.34, SD = 1.97
+
+# Risk Analysis R&R
+clean |> 
+    

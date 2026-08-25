@@ -175,3 +175,9 @@ biomade |>
   theme_bw() +
   stat_summary(fun = mean, geom = "point") +
   stat_summary(fun.data = mean_cl_normal, geom = "errorbar", width = 0.2)
+
+
+biomade |> 
+  group_by() |> 
+  anova_test(paymore ~ GMstim)
+
