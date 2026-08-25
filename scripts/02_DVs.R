@@ -495,6 +495,81 @@ clean |>
     group_by() |> 
     descr(Q20c) # M = 3.34, SD = 1.97
 
-# Risk Analysis R&R
+# Risk Analysis R&R -----------------
+# Split familiar into low and high
+# Figure out whether risks and benefits is different among low and high familiar
+
+clean |> freq(familiar)
+clean |> group_by() |> 
+  descr(familiar) # M = 3.17, SD = 2.12
+clean <- clean |>
+  mutate(dfamiliar = case_when(
+    familiar == 1 ~ "low",
+    familiar == 2 ~ "low",
+    familiar == 3 ~ "hi",
+    familiar == 4 ~ "hi",
+    familiar == 5 ~ "hi",
+    familiar == 6 ~ "hi",
+    familiar == 7 ~ "hi",
+  ))
+
+clean |> freq(dfamiliar)
+
 clean |> 
-    
+  select(risks, benefits, dfamiliar) |> 
+  na.omit() |> 
+  group_by() |> 
+  t_test(risks ~ dfamiliar) # t(1182) = 8.90, p < .001
+clean |> 
+  select(risks, dfamiliar) |> 
+  na.omit() |> 
+  group_by(dfamiliar) |> 
+  descr(risks)
+
+clean |> 
+  select(risks, benefits, dfamiliar) |> 
+  na.omit() |> 
+  group_by() |> 
+  t_test(benefits ~ dfamiliar) # t(1178) = 8.19, p < .001
+clean |> 
+  select(benefits, dfamiliar) |> 
+  na.omit() |> 
+  group_by(dfamiliar) |> 
+  descr(benefits)
+
+# Folding risks and benefits -----------------
+# Redo t-tests with folded risks and benefits
+
+clean <- clean |> 
+  mutate(
+    frisks = case_when(
+        risks == 1  | risks == 7 ~ 4,
+        risks == 2  | risks == 6 ~ 3,
+        risks == 3  | risks == 5 ~ 2,
+        risks == 4 ~ 1,
+    )
+  )
+clean |> freq(frisks)
+
+clean |> 
+  select(frisks, dfamiliar) |> 
+  na.omit() |> 
+  group_by() |> 
+  t_test(frisks ~ dfamiliar) # t(1180) = 7.58, p < .001
+
+clean <- clean |> 
+  mutate(
+    fbenefits = case_when(
+        benefits == 1  | benefits == 7 ~ 4,
+        benefits == 2  | benefits == 6 ~ 3,
+        benefits == 3  | benefits == 5 ~ 2,
+        benefits == 4 ~ 1,
+    )
+  )
+clean |> freq(fbenefits)
+
+clean |> 
+  select(fbenefits, dfamiliar) |> 
+  na.omit() |> 
+  group_by() |> 
+  t_test(fbenefits ~ dfamiliar) # t(1169) = 8.40, p < .001
