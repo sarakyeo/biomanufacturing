@@ -181,3 +181,108 @@ biomade |>
   group_by() |> 
   anova_test(paymore ~ GMstim)
 
+# Checking tech optimism/pessimism measures ------------
+biomade |> 
+  select(Q2.8_1:Q2.8_10) |> 
+  freq()
+
+biomade <- var_recode(
+  data = biomade,
+  vars = c(Q2.8_1:Q2.8_10)
+)
+
+biomade |> 
+  select(Q2.8_1c:Q2.8_10c) |> 
+  freq()
+
+## Factor analysis -------------
+biomade |> 
+  select(Q2.8_1c:Q2.8_10c) |> 
+  KMO() # overall MSA = .88
+
+biomade |> 
+  select(Q2.8_1c:Q2.8_10c) |> 
+  cortest.bartlett() # sig.
+
+biomade |> 
+  select(Q2.8_1c:Q2.8_10c) |> 
+  fa.parallel() # 2 factors, 2 components
+
+fa <- biomade |> 
+  select(Q2.8_1c:Q2.8_10c) |> 
+  fa(.,
+      nfactors = 2,
+      fm = "pa",
+      max.iter = 100,
+      rotate = "promax")
+
+fa |> fa.diagram() # optimism on one factor, pessimism on one factor
+
+biomade <- biomade |> 
+  rowwise() |> 
+  mutate(
+    techopt = mean(
+      c(Q2.8_1c, Q2.8_2c, Q2.8_3c, Q2.8_4c, Q2.8_5c),
+      na.rm = TRUE
+    )
+  )
+
+biomade <- biomade |> 
+  rowwise() |> 
+  mutate(
+    techpes = mean(
+      c(Q2.8_6c, Q2.8_7c, Q2.8_8c, Q2.8_9c, Q2.8_10c),
+      na.rm = TRUE
+    )
+  )
+
+biomade |> freq(techopt)
+biomade |> freq(techpes)
+
+biomade |> 
+  select(techopt, techpes) |> 
+  group_by() |> 
+  descr()
+
+#                     techopt   techpes
+# ----------------- --------- ---------
+#              Mean      5.24      4.59
+#           Std.Dev      1.15      1.34
+#               Min      1.00      1.00
+#                Q1      4.60      3.80
+#            Median      5.40      4.80
+#                Q3      6.00      5.60
+#               Max      7.00      7.00
+#               MAD      1.19      1.48
+#               IQR      1.40      1.80
+#                CV      0.22      0.29
+#          Skewness     -0.59     -0.40
+#       SE.Skewness      0.08      0.08
+#          Kurtosis      0.32     -0.33
+#           N.Valid   1011.00   1011.00
+#                 N   1011.00   1011.00
+#         Pct.Valid    100.00    100.00
+
+biomade |> 
+  select(risks, benefits, support, techopt, techpes) |> 
+  cor_test(risks, techopt) # Pearson's r = .11, p = .0129
+
+biomade |> 
+  select(risks, benefits, support, techopt, techpes) |> 
+  cor_test(benefits, techopt) # Pearson's r = .50, p < .001
+
+biomade |> 
+  select(risks, benefits, support, techopt, techpes) |> 
+  cor_test(support, techopt) # Pearson's r = .51, p < .001
+
+biomade |> 
+  select(risks, benefits, support, techopt, techpes) |> 
+  cor_test(risks, techpes) # Pearson's r = .22, p < .001
+
+biomade |> 
+  select(risks, benefits, support, techopt, techpes) |> 
+  cor_test(benefits, techpes) # ns
+
+biomade |> 
+  select(risks, benefits, support, techopt, techpes) |> 
+  cor_test(support, techpes) # ns

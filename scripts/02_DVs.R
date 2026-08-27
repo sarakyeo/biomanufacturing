@@ -557,6 +557,12 @@ clean |>
   group_by() |> 
   t_test(frisks ~ dfamiliar) # t(1180) = 7.58, p < .001
 
+clean |> 
+  select(frisks, dfamiliar) |> 
+  na.omit() |> 
+  group_by(dfamiliar) |> 
+  descr(frisks)
+
 clean <- clean |> 
   mutate(
     fbenefits = case_when(
@@ -573,3 +579,9 @@ clean |>
   na.omit() |> 
   group_by() |> 
   t_test(fbenefits ~ dfamiliar) # t(1169) = 8.40, p < .001
+
+clean |> 
+  select(fbenefits, dfamiliar) |> 
+  na.omit() |> 
+  group_by(dfamiliar) |> 
+  descr(fbenefits)
