@@ -563,6 +563,16 @@ clean |>
   group_by(dfamiliar) |> 
   descr(frisks)
 
+# Descriptive Statistics  
+# frisks by dfamiliar  
+# Data Frame: clean  
+# N: 1188  
+
+#                         hi      low
+# ----------------- -------- --------
+#              Mean     2.48     2.01
+#           Std.Dev     1.06     1.08
+
 clean <- clean |> 
   mutate(
     fbenefits = case_when(
@@ -585,3 +595,83 @@ clean |>
   na.omit() |> 
   group_by(dfamiliar) |> 
   descr(fbenefits)
+
+# Descriptive Statistics  
+# fbenefits by dfamiliar  
+# Data Frame: clean  
+# N: 1185  
+
+#                         hi      low
+# ----------------- -------- --------
+#              Mean     2.75     2.22
+#           Std.Dev     1.05     1.11
+
+# Folding support variable and running familiarity analysis -------
+clean |> 
+  select(support1, support2, support3) |> 
+  freq()
+
+clean <- clean |> 
+  mutate(
+    fsupport1 = case_when(
+        support1 == 1 | support1 == 7 ~ 4,
+        support1 == 2 | support1 == 6 ~ 3,
+        support1 == 3 | support1 == 5 ~ 2,
+        support1 == 4 ~ 1,
+    )
+  )
+clean |> freq(fsupport1)
+
+clean <- clean |> 
+  mutate(
+    fsupport2 = case_when(
+        support2 == 1 | support2 == 7 ~ 4,
+        support2 == 2 | support2 == 6 ~ 3,
+        support2 == 3 | support2 == 5 ~ 2,
+        support2 == 4 ~ 1,
+    )
+  )
+clean |> freq(fsupport2)
+
+clean <- clean |> 
+  mutate(
+    fsupport3 = case_when(
+        support3 == 1 | support3 == 7 ~ 4,
+        support3 == 2 | support3 == 6 ~ 3,
+        support3 == 3 | support3 == 5 ~ 2,
+        support3 == 4 ~ 1,
+    )
+  )
+clean |> freq(fsupport3)
+
+clean <- clean |> 
+  rowwise() |> 
+  mutate(
+    fsupport = mean(
+        c(fsupport1, fsupport2, fsupport3),
+        na.rm = TRUE
+    )
+  )
+clean |> freq(fsupport)
+
+clean |> 
+  select(fsupport, dfamiliar) |> 
+  na.omit() |> 
+  group_by() |> 
+  t_test(fsupport ~ dfamiliar) # t(1150) = 9.18, p < .001
+
+clean |> 
+  select(fsupport, dfamiliar) |> 
+  na.omit() |> 
+  group_by(dfamiliar) |> 
+  descr(fsupport)
+
+# Descriptive Statistics  
+# fsupport by dfamiliar  
+# Data Frame: clean  
+# N: 1188  
+
+#                         hi      low
+# ----------------- -------- --------
+#              Mean     2.71     2.20
+#           Std.Dev     0.90     1.01

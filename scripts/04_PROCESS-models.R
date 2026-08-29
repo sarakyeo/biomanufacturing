@@ -174,6 +174,11 @@ m1 <- process(
 
 # Need indirect effects of issue manipulation on support 
 # via risks and benefits
+clean |> 
+  select(support, nissue, risks, benefits, nfemale, familiar, ndefn) |> 
+  group_by() |> 
+  freq()
+
 process(
   data = clean, 
   y = "support",
