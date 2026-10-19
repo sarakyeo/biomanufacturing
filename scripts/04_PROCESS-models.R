@@ -73,21 +73,47 @@ m1 <- process(
 )
 
 
-# DV = support; Testing moderated mediation model with two mediators -----------------
+# DV = support; Testing moderated mediation model with two mediators and one moderator -----------------
 # Y = support
 # M1 = risks
 # M2 = benefits
 # X = defn
 # cov = issue
+# w = familiar
 
 m1 <- process(
   data = clean, 
   y = "support",
   x = "ndefn",
   m = c("risks", "benefits"),
-  w = "nissue",
-  cov = "nfemale",
+  w = "familiar",
+  cov = c("nfemale", "nissue"),
   model = 8,
+  total = 1,
+  contrast = 1,
+  progress = 0,
+  save = 2,
+  boot = 10000,
+  seed = 20251111
+)
+
+
+# DV = support; Testing moderated mediation model with two mediators & two moderators -----------------
+# Y = support
+# M1 = risks
+# M2 = benefits
+# X = defn
+# W = female
+# cov = issue
+
+m2 <- process(
+  data = clean, 
+  y = "support",
+  x = "ndefn",
+  m = c("risks", "benefits"),
+  w = "nissue",
+  z = "nfemale",
+  model = 12,
   total = 1,
   contrast = 1,
   progress = 0,
@@ -108,9 +134,9 @@ m1 <- process(
 m2 <- process(
   data = clean, 
   y = "support",
-  x = "ndefn",
+  x = "nissue",
   m = c("risks", "benefits"),
-  w = "nissue",
+  w = "ndefn",
   z = "nfemale",
   model = 12,
   total = 1,
@@ -121,30 +147,6 @@ m2 <- process(
   seed = 20251111
 )
 
-
-# DV = support; Testing moderated mediation model with two mediators -----------------
-# Y = support
-# M1 = risks
-# M2 = benefits
-# X = defn
-# W = issue
-# cov = female
-
-m1 <- process(
-  data = clean, 
-  y = "support",
-  x = "ndefn",
-  m = c("risks", "benefits"),
-  w = "nissue",
-  cov = "nfemale",
-  model = 8,
-  total = 1,
-  contrast = 1,
-  progress = 0,
-  save = 2,
-  boot = 10000,
-  seed = 20260127
-)
 
 # 28Jan26: Model 4 including `familiar`
 # Y = support
@@ -193,6 +195,20 @@ process(
   boot = 10000,
   seed = 20260128)
 
+process(
+  data = clean, 
+  y = "support",
+  x = "ndefn",
+  m = c("risks", "benefits"),
+  cov = c("nfemale", "familiar", "nissue"),
+  model = 4,
+  total = 1,
+  contrast = 1,
+  progress = 0,
+  save = 2,
+  boot = 10000,
+  seed = 20260128)
+
 # Decided to also run the model without `nfemale` or `familiar`
 process(
   data = clean, 
@@ -207,3 +223,118 @@ process(
   save = 2,
   boot = 10000,
   seed = 20260128)
+
+# 19-Oct-26 
+# DV = support; Testing moderated mediation model with two mediators & two moderators -----------------
+
+m <- process(
+  data = clean, 
+  y = "support",
+  x = "nissue",
+  m = c("risks", "benefits"),
+  w = "ndefn",
+  z = "familiar",
+  cov = "nfemale",
+  model = 10,
+  total = 1,
+  contrast = 1,
+  progress = 0,
+  save = 2,
+  boot = 10000,
+  seed = 20261019
+)
+
+m <- process(
+  data = clean, 
+  y = "support",
+  x = "ndefn",
+  m = c("risks", "benefits"),
+  w = "nissue",
+  z = "familiar",
+  cov = "nfemale",
+  model = 10,
+  total = 1,
+  contrast = 1,
+  progress = 0,
+  save = 2,
+  boot = 10000,
+  seed = 20261019
+)
+
+
+# 19-Oct-26 ------
+# DV = support; Testing mediation model with two mediators -----------------
+# Y = support
+# M1 = risks
+# M2 = benefits
+# X = defn
+# W = issue
+# cov = female
+
+m1 <- process(
+  data = clean, 
+  y = "support",
+  x = "ndefn",
+  m = c("risks", "benefits"),
+  w = "familiar",
+  cov = c("nfemale", "nissue"),
+  model = 8,
+  total = 1,
+  contrast = 1,
+  progress = 0,
+  save = 2,
+  boot = 10000,
+  seed = 20261019
+)
+
+m2 <- process(
+  data = clean, 
+  y = "support",
+  x = "nissue",
+  m = c("risks", "benefits"),
+  w = "familiar",
+  cov = c("nfemale", "ndefn"),
+  model = 8,
+  total = 1,
+  contrast = 1,
+  progress = 0,
+  save = 2,
+  boot = 10000,
+  seed = 20261019
+)
+
+
+# 19-Oct-26 ----
+# DV = support; testing moderated mediation model with two mediators and one moderator ----
+
+m1 <- process(
+  data = clean, 
+  y = "support",
+  x = "ndefn",
+  m = c("risks", "benefits"),
+  w = "familiar",
+  cov = c("nfemale", "nissue"),
+  model = 8,
+  total = 1,
+  contrast = 1,
+  progress = 0,
+  save = 2,
+  boot = 10000,
+  seed = 20261019
+)
+
+m2 <- process(
+  data = clean, 
+  y = "support",
+  x = "nissue",
+  m = c("risks", "benefits"),
+  w = "familiar",
+  cov = c("nfemale", "ndefn"),
+  model = 8,
+  total = 1,
+  contrast = 1,
+  progress = 0,
+  save = 2,
+  boot = 10000,
+  seed = 20261019
+)
