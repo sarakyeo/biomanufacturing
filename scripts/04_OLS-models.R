@@ -1,29 +1,29 @@
 
 m0r <- clean |> 
-  select(support, female, defn, issue, risks, benefits, familiar) |> 
+  select(support, female, defn, issue, risks, benefits, familiar, MCself) |> 
   na.omit() |> 
   lm(
-    formula = risks ~ defn + issue + female + familiar +
+    formula = risks ~ defn + issue + female + familiar + MCself +
       defn:issue + defn:familiar + issue:familiar +
       defn:issue:familiar
     )
 m0r |> summ(center = TRUE)
 
 m0b <- clean |> 
-  select(support, female, defn, issue, risks, benefits, familiar) |> 
+  select(support, female, defn, issue, risks, benefits, familiar, MCself) |> 
   na.omit() |> 
   lm(
-    formula = benefits ~ defn + issue + female + familiar +
+    formula = benefits ~ defn + issue + female + familiar + MCself +
     defn:issue + defn:familiar + issue:familiar +
       defn:issue:familiar
   )
 m0b |> summ(center = TRUE)
 
 m1 <- clean |> 
-  select(support, female, defn, issue, risks, benefits, familiar) |> 
+  select(support, female, defn, issue, risks, benefits, familiar, MCself) |> 
   na.omit() |> 
   lm(
-    formula = support ~ defn + issue + female + familiar + risks + benefits +
+    formula = support ~ defn + issue + female + familiar + risks + benefits + MCself +
       defn:issue + defn:familiar + issue:familiar +
       defn:issue:familiar
       )
@@ -34,7 +34,6 @@ export_summs(m0r, m0b, m1,
              number_format = 2,
              ci_level = .95,
              align = ".",
-             scale = TRUE,
              statistics = c("N" = "nobs",
                             "Adj. R-squared"= "adj.r.squared",
                             "F" = "statistic",
@@ -46,12 +45,14 @@ export_summs(m0r, m0b, m1,
                        "Definition manipulation (complex)" = "defncomplex",
                        "Issue manipulation (makeup)" = "issuemakeup",
                        "Gender (female)" = "femalefemale",
+                       "Perceived familiarity" = "familiar",
+                       "Perceived ease" = "MCself",
                        "Perceived risks" = "risks",
                        "Perceived benefits" = "benefits",
-                       "Perceived familiarity" = "familiar",
                        "Definition × Issue" = "defncomplex:issuemakeup",
                        "Definition × Familiar" = "defncomplex:familiar",
-                       "Issue × Familiar" = "issuemakeup:familiar"
+                       "Issue × Familiar" = "issuemakeup:familiar",
+                       "Definition × Issue × Familiar" = "defncomplex:issuemakeup:familiar"
                       ))|> 
         set_all_padding(0) |> 
         set_label("tab:OLS-model") |> 
