@@ -56,7 +56,7 @@ export_summs(m0r, m0b, m1,
                       ))|> 
         set_all_padding(0) |> 
         set_label("tab:OLS-model") |> 
-        set_caption("Unstandardized regression coefficients and standard errors (in parentheses) in the OLS model predicting support for biomanufacturing research.") |> 
+        set_caption("Unstandardized regression coefficients and standard errors (in parentheses) in the path model predicting support for biomanufacturing research.") |> 
         set_font_size(11) |> 
         print_latex() |> 
         capture.output(file = here::here("outputs", "tab-OLS-model.tex"))
@@ -107,4 +107,10 @@ export_summs(m1r, m1b, m2,
                        "Perceived ease" = "MCself",
                        "Perceived risks" = "risks",
                        "Perceived benefits" = "benefits"
-                      ))
+                      )) |> 
+        set_all_padding(0) |> 
+        set_label("tab:OLS-model-supp") |> 
+        set_caption("Unstandardized regression coefficients and standard errors (in parentheses) in the path model predicting support for biomanufacturing research.") |> 
+        set_font_size(11) |> 
+        print_latex() |> 
+        capture.output(file = here::here("outputs", "tab-OLS-model-supp.tex"))
