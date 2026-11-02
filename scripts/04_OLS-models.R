@@ -1,4 +1,4 @@
-
+# With two- and three-way interactions ---------------
 m0r <- clean |> 
   select(support, female, defn, issue, risks, benefits, familiar, MCself) |> 
   na.omit() |> 
@@ -34,12 +34,13 @@ export_summs(m0r, m0b, m1,
              number_format = 2,
              ci_level = .95,
              align = ".",
+             stars = NULL,
              statistics = c("N" = "nobs",
                             "Adj. R-squared"= "adj.r.squared",
                             "F" = "statistic",
                             "df" = "df",
                             "p" = "p.value"),
-             error_format = "({std.error})",
+             error_format = "({std.error}), {p.value}",
              error_pos = c("same"),
              coefs = c("(Intercept)" = "(Intercept)",
                        "Definition manipulation (complex)" = "defncomplex",
@@ -55,11 +56,11 @@ export_summs(m0r, m0b, m1,
                        "Definition × Issue × Familiar" = "defncomplex:issuemakeup:familiar"
                       ))|> 
         set_all_padding(0) |> 
-        set_label("tab:OLS-model") |> 
-        set_caption("Unstandardized regression coefficients and standard errors (in parentheses) in the path model predicting support for biomanufacturing research.") |> 
+        set_label("tab:OLS-model-supp") |> 
+        set_caption("Unstandardized regression coefficients, standard errors (in parentheses), and p-values in the path model predicting support for biomanufacturing research.") |> 
         set_font_size(11) |> 
         print_latex() |> 
-        capture.output(file = here::here("outputs", "tab-OLS-model.tex"))
+        capture.output(file = here::here("outputs", "tab-OLS-model-supp.tex"))
 
 
 # Without interactions -----
@@ -92,12 +93,13 @@ export_summs(m1r, m1b, m2,
              number_format = 2,
              ci_level = .95,
              align = ".",
+             stars = NULL,
              statistics = c("N" = "nobs",
                             "Adj. R-squared"= "adj.r.squared",
                             "F" = "statistic",
                             "df" = "df",
                             "p" = "p.value"),
-             error_format = "({std.error})",
+             error_format = "({std.error}), {p.value}",
              error_pos = c("same"),
              coefs = c("(Intercept)" = "(Intercept)",
                        "Definition manipulation (complex)" = "defncomplex",
@@ -109,8 +111,70 @@ export_summs(m1r, m1b, m2,
                        "Perceived benefits" = "benefits"
                       )) |> 
         set_all_padding(0) |> 
-        set_label("tab:OLS-model-supp") |> 
-        set_caption("Unstandardized regression coefficients and standard errors (in parentheses) in the path model predicting support for biomanufacturing research.") |> 
+        set_label("tab:OLS-model") |> 
+        set_caption("Unstandardized regression coefficients, standard errors (in parentheses), and p-values in the path model predicting support for biomanufacturing research.") |> 
         set_font_size(11) |> 
         print_latex() |> 
-        capture.output(file = here::here("outputs", "tab-OLS-model-supp.tex"))
+        capture.output(file = here::here("outputs", "tab-OLS-model.tex"))
+
+# With two-way interactions -------------
+m0r <- clean |> 
+  select(support, female, defn, issue, risks, benefits, familiar, MCself) |> 
+  na.omit() |> 
+  lm(
+    formula = risks ~ defn + issue + female + familiar + MCself +
+      defn:issue + defn:familiar + issue:familiar
+    )
+m0r |> summ(center = TRUE)
+
+m0b <- clean |> 
+  select(support, female, defn, issue, risks, benefits, familiar, MCself) |> 
+  na.omit() |> 
+  lm(
+    formula = benefits ~ defn + issue + female + familiar + MCself +
+    defn:issue + defn:familiar + issue:familiar
+  )
+m0b |> summ(center = TRUE)
+
+m1 <- clean |> 
+  select(support, female, defn, issue, risks, benefits, familiar, MCself) |> 
+  na.omit() |> 
+  lm(
+    formula = support ~ defn + issue + female + familiar + risks + benefits + MCself +
+      defn:issue + defn:familiar + issue:familiar
+      )
+m1 |> summ()
+
+export_summs(m0r, m0b, m1,
+             model.names = c("Risks", "Benefits", "Support"),
+             number_format = 2,
+             ci_level = .95,
+             align = ".",
+             stars = NULL,
+             statistics = c("N" = "nobs",
+                            "Adj. R-squared"= "adj.r.squared",
+                            "F" = "statistic",
+                            "df" = "df",
+                            "p" = "p.value"),
+             error_format = "({std.error}), {p.value}",
+             error_pos = c("same"),
+             coefs = c("(Intercept)" = "(Intercept)",
+                       "Definition manipulation (complex)" = "defncomplex",
+                       "Issue manipulation (makeup)" = "issuemakeup",
+                       "Gender (female)" = "femalefemale",
+                       "Perceived familiarity" = "familiar",
+                       "Perceived ease" = "MCself",
+                       "Perceived risks" = "risks",
+                       "Perceived benefits" = "benefits",
+                       "Definition × Issue" = "defncomplex:issuemakeup",
+                       "Definition × Familiar" = "defncomplex:familiar",
+                       "Issue × Familiar" = "issuemakeup:familiar"
+                      ))|> 
+        set_all_padding(0) |> 
+        set_label("tab:OLS-model-suppB") |> 
+        set_caption("Unstandardized regression coefficients, standard errors (in parentheses), and p-values in the path model predicting support for biomanufacturing research.") |> 
+        set_font_size(11) |> 
+        print_latex() |> 
+        capture.output(file = here::here("outputs", "tab-OLS-model-suppB.tex"))
+
+# Send Mike this table.
